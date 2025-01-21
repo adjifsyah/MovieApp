@@ -9,24 +9,53 @@
 /* Begin PBXBuildFile section */
 		781511852D3F451B0033CFCC /* MovieAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511842D3F451B0033CFCC /* MovieAppApp.swift */; };
 		781511872D3F451B0033CFCC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511862D3F451B0033CFCC /* ContentView.swift */; };
-		781511892D3F451D0033CFCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781511882D3F451D0033CFCC /* Assets.xcassets */; };
 		7815118C2D3F451D0033CFCC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7815118B2D3F451D0033CFCC /* Preview Assets.xcassets */; };
 		7815119C2D3F45910033CFCC /* AlamofireClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815119B2D3F45910033CFCC /* AlamofireClients.swift */; };
 		7815119E2D3F45980033CFCC /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815119D2D3F45980033CFCC /* RemoteDataSource.swift */; };
 		781511A12D3F45E30033CFCC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 781511A02D3F45E30033CFCC /* RxCocoa */; };
 		781511A32D3F45E30033CFCC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 781511A22D3F45E30033CFCC /* RxSwift */; };
 		781511AB2D3F462B0033CFCC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 781511AA2D3F462B0033CFCC /* Alamofire */; };
+		781511AD2D3F46D30033CFCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781511AC2D3F46D30033CFCC /* Assets.xcassets */; };
+		781511AF2D3F49230033CFCC /* Environtmens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511AE2D3F49230033CFCC /* Environtmens.swift */; };
+		781511B72D3F49FA0033CFCC /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511B62D3F49FA0033CFCC /* MovieAppTests.swift */; };
+		781511C32D3F4D720033CFCC /* ResponseNowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C22D3F4D720033CFCC /* ResponseNowPlaying.swift */; };
+		781511C72D3F56B00033CFCC /* EnvironmentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */; };
+		781511C92D3F7EE60033CFCC /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C82D3F7EE60033CFCC /* RemoteDataSourceTest.swift */; };
+		781511CC2D3F80990033CFCC /* AlamofireHTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511CB2D3F80990033CFCC /* AlamofireHTTPClientTest.swift */; };
+		783DDF4D2D3FD1E800DD99AE /* URLSessionClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */; };
+		783DDF4F2D3FE46300DD99AE /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF4E2D3FE46300DD99AE /* MockURLProtocol.swift */; };
+		783DDF512D3FE51F00DD99AE /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF502D3FE51F00DD99AE /* URLSessionClient.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		781511B82D3F49FA0033CFCC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 781511792D3F451B0033CFCC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 781511802D3F451B0033CFCC;
+			remoteInfo = MovieApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		781511812D3F451B0033CFCC /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		781511842D3F451B0033CFCC /* MovieAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppApp.swift; sourceTree = "<group>"; };
 		781511862D3F451B0033CFCC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		781511882D3F451D0033CFCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7815118B2D3F451D0033CFCC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		781511982D3F45480033CFCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7815119B2D3F45910033CFCC /* AlamofireClients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireClients.swift; sourceTree = "<group>"; };
 		7815119D2D3F45980033CFCC /* RemoteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
+		781511AC2D3F46D30033CFCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		781511AE2D3F49230033CFCC /* Environtmens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environtmens.swift; sourceTree = "<group>"; };
+		781511B42D3F49FA0033CFCC /* MovieAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		781511B62D3F49FA0033CFCC /* MovieAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppTests.swift; sourceTree = "<group>"; };
+		781511C22D3F4D720033CFCC /* ResponseNowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseNowPlaying.swift; sourceTree = "<group>"; };
+		781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentsTest.swift; sourceTree = "<group>"; };
+		781511C82D3F7EE60033CFCC /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
+		781511CB2D3F80990033CFCC /* AlamofireHTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireHTTPClientTest.swift; sourceTree = "<group>"; };
+		783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClientTest.swift; sourceTree = "<group>"; };
+		783DDF4E2D3FE46300DD99AE /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		783DDF502D3FE51F00DD99AE /* URLSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +69,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		781511B12D3F49FA0033CFCC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -47,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				781511832D3F451B0033CFCC /* MovieApp */,
+				781511B52D3F49FA0033CFCC /* MovieAppTests */,
 				781511822D3F451B0033CFCC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				781511812D3F451B0033CFCC /* MovieApp.app */,
+				781511B42D3F49FA0033CFCC /* MovieAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				781511842D3F451B0033CFCC /* MovieAppApp.swift */,
+				781511AE2D3F49230033CFCC /* Environtmens.swift */,
 				781511862D3F451B0033CFCC /* ContentView.swift */,
 			);
 			path = App;
@@ -90,6 +129,8 @@
 		781511932D3F45260033CFCC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				781511C12D3F4D660033CFCC /* Response */,
+				781511C02D3F4D5C0033CFCC /* Domain */,
 				781511942D3F452C0033CFCC /* Data */,
 			);
 			path = Core;
@@ -116,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				7815119B2D3F45910033CFCC /* AlamofireClients.swift */,
+				783DDF502D3FE51F00DD99AE /* URLSessionClient.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -124,9 +166,85 @@
 			isa = PBXGroup;
 			children = (
 				781511982D3F45480033CFCC /* Info.plist */,
-				781511882D3F451D0033CFCC /* Assets.xcassets */,
+				781511AC2D3F46D30033CFCC /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		781511B52D3F49FA0033CFCC /* MovieAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				781511C42D3F568F0033CFCC /* App */,
+				781511BD2D3F4A020033CFCC /* Core */,
+				781511B62D3F49FA0033CFCC /* MovieAppTests.swift */,
+			);
+			path = MovieAppTests;
+			sourceTree = "<group>";
+		};
+		781511BD2D3F4A020033CFCC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				781511BE2D3F4A050033CFCC /* Data */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		781511BE2D3F4A050033CFCC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				781511CA2D3F807D0033CFCC /* Client */,
+				781511BF2D3F4A060033CFCC /* Remote */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		781511BF2D3F4A060033CFCC /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				781511C82D3F7EE60033CFCC /* RemoteDataSourceTest.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		781511C02D3F4D5C0033CFCC /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		781511C12D3F4D660033CFCC /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				781511C22D3F4D720033CFCC /* ResponseNowPlaying.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		781511C42D3F568F0033CFCC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				781511C52D3F56920033CFCC /* Environment */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		781511C52D3F56920033CFCC /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		781511CA2D3F807D0033CFCC /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				781511CB2D3F80990033CFCC /* AlamofireHTTPClientTest.swift */,
+				783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */,
+				783DDF4E2D3FE46300DD99AE /* MockURLProtocol.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +272,24 @@
 			productReference = 781511812D3F451B0033CFCC /* MovieApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		781511B32D3F49FA0033CFCC /* MovieAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 781511BA2D3F49FA0033CFCC /* Build configuration list for PBXNativeTarget "MovieAppTests" */;
+			buildPhases = (
+				781511B02D3F49FA0033CFCC /* Sources */,
+				781511B12D3F49FA0033CFCC /* Frameworks */,
+				781511B22D3F49FA0033CFCC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				781511B92D3F49FA0033CFCC /* PBXTargetDependency */,
+			);
+			name = MovieAppTests;
+			productName = MovieAppTests;
+			productReference = 781511B42D3F49FA0033CFCC /* MovieAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -166,6 +302,10 @@
 				TargetAttributes = {
 					781511802D3F451B0033CFCC = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					781511B32D3F49FA0033CFCC = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 781511802D3F451B0033CFCC;
 					};
 				};
 			};
@@ -187,6 +327,7 @@
 			projectRoot = "";
 			targets = (
 				781511802D3F451B0033CFCC /* MovieApp */,
+				781511B32D3F49FA0033CFCC /* MovieAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -196,8 +337,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				781511AD2D3F46D30033CFCC /* Assets.xcassets in Resources */,
 				7815118C2D3F451D0033CFCC /* Preview Assets.xcassets in Resources */,
-				781511892D3F451D0033CFCC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		781511B22D3F49FA0033CFCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,14 +356,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				781511C32D3F4D720033CFCC /* ResponseNowPlaying.swift in Sources */,
+				781511AF2D3F49230033CFCC /* Environtmens.swift in Sources */,
 				7815119E2D3F45980033CFCC /* RemoteDataSource.swift in Sources */,
 				781511872D3F451B0033CFCC /* ContentView.swift in Sources */,
+				783DDF512D3FE51F00DD99AE /* URLSessionClient.swift in Sources */,
 				781511852D3F451B0033CFCC /* MovieAppApp.swift in Sources */,
 				7815119C2D3F45910033CFCC /* AlamofireClients.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		781511B02D3F49FA0033CFCC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				781511B72D3F49FA0033CFCC /* MovieAppTests.swift in Sources */,
+				781511C72D3F56B00033CFCC /* EnvironmentsTest.swift in Sources */,
+				781511C92D3F7EE60033CFCC /* RemoteDataSourceTest.swift in Sources */,
+				783DDF4F2D3FE46300DD99AE /* MockURLProtocol.swift in Sources */,
+				783DDF4D2D3FD1E800DD99AE /* URLSessionClientTest.swift in Sources */,
+				781511CC2D3F80990033CFCC /* AlamofireHTTPClientTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		781511B92D3F49FA0033CFCC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 781511802D3F451B0033CFCC /* MovieApp */;
+			targetProxy = 781511B82D3F49FA0033CFCC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7815118D2D3F451D0033CFCC /* Debug */ = {
@@ -397,6 +569,42 @@
 			};
 			name = Release;
 		};
+		781511BB2D3F49FA0033CFCC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A9ARF73RJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = id.co.adji.MovieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieApp";
+			};
+			name = Debug;
+		};
+		781511BC2D3F49FA0033CFCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6A9ARF73RJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = id.co.adji.MovieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,6 +622,15 @@
 			buildConfigurations = (
 				781511902D3F451D0033CFCC /* Debug */,
 				781511912D3F451D0033CFCC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		781511BA2D3F49FA0033CFCC /* Build configuration list for PBXNativeTarget "MovieAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				781511BB2D3F49FA0033CFCC /* Debug */,
+				781511BC2D3F49FA0033CFCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
