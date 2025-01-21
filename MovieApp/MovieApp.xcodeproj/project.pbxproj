@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CF7D66422D3EA6EC005A4552 /* Exceptions for "MovieApp" folder in "MovieApp" target */ = {
+		CF7D66422D3EA6EC005A4552 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				SupportingFiles/Info.plist,
@@ -28,14 +28,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CF7D66322D3EA680005A4552 /* MovieApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				CF7D66422D3EA6EC005A4552 /* Exceptions for "MovieApp" folder in "MovieApp" target */,
-			);
-			path = MovieApp;
-			sourceTree = "<group>";
-		};
+		CF7D66322D3EA680005A4552 /* MovieApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CF7D66422D3EA6EC005A4552 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MovieApp; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +107,7 @@
 				};
 			};
 			buildConfigurationList = CF7D662B2D3EA680005A4552 /* Build configuration list for PBXProject "MovieApp" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +121,6 @@
 				CF7D66572D3EA896005A4552 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CFEBEBB72D3EB5A600CF5638 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = CF7D66312D3EA680005A4552 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
