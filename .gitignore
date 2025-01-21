@@ -111,8 +111,10 @@ xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,swiftpackagemanager,swift
 
 
-.DS_Store
+
+echo .DS_Store >> .gitignore
