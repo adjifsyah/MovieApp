@@ -7,6 +7,7 @@
 
 import XCTest
 import RxSwift
+import Alamofire
 @testable import MovieApp
 
 class AlamofireHTTPClientTest: XCTestCase {
@@ -22,6 +23,7 @@ class AlamofireHTTPClientTest: XCTestCase {
     }
     
     override func tearDown() {
+        MockURLProtocol.stubError = nil
         client = nil
         url = nil
         disposeBag = nil
@@ -45,6 +47,32 @@ class AlamofireHTTPClientTest: XCTestCase {
                     if let json = try? JSONSerialization.jsonObject(with: data, options: []),
                        let dict = json as? [String: String] {
                         XCTAssertEqual(dict["status"], "ok")
+                        expectation.fulfill()
+                    }
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 5)
+    }
+    
+    func testAlamofire_whenGivenNoData_shouldReturnError() {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        client = AlamofireClients(URLSessionConfig: config)
+        
+        MockURLProtocol.stubError = NSError(domain: "MockError", code: 1001)
+        
+        let expectation = XCTestExpectation(description: "Observer should receive data")
+        
+        client.load(url: url, method: "GET", params: nil)
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                onError: { error in
+                    if let afError = error as? AFError,
+                       let underlyingError = afError.underlyingError as NSError? {
+                        XCTAssertEqual(underlyingError.domain, "MockError")
+                        XCTAssertEqual(underlyingError.code, 1001)
                         expectation.fulfill()
                     }
                 }

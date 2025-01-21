@@ -23,6 +23,7 @@ class URLSessionClientTest: XCTestCase {
     }
 
     override func tearDown() {
+        MockURLProtocol.stubError = nil
         session = nil
         client = nil
         url = nil

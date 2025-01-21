@@ -19,7 +19,6 @@
 		781511AF2D3F49230033CFCC /* Environtmens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511AE2D3F49230033CFCC /* Environtmens.swift */; };
 		781511B72D3F49FA0033CFCC /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511B62D3F49FA0033CFCC /* MovieAppTests.swift */; };
 		781511C32D3F4D720033CFCC /* ResponseNowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C22D3F4D720033CFCC /* ResponseNowPlaying.swift */; };
-		781511C72D3F56B00033CFCC /* EnvironmentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */; };
 		781511C92D3F7EE60033CFCC /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511C82D3F7EE60033CFCC /* RemoteDataSourceTest.swift */; };
 		781511CC2D3F80990033CFCC /* AlamofireHTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781511CB2D3F80990033CFCC /* AlamofireHTTPClientTest.swift */; };
 		783DDF4D2D3FD1E800DD99AE /* URLSessionClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */; };
@@ -50,7 +49,6 @@
 		781511B42D3F49FA0033CFCC /* MovieAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		781511B62D3F49FA0033CFCC /* MovieAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppTests.swift; sourceTree = "<group>"; };
 		781511C22D3F4D720033CFCC /* ResponseNowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseNowPlaying.swift; sourceTree = "<group>"; };
-		781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentsTest.swift; sourceTree = "<group>"; };
 		781511C82D3F7EE60033CFCC /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		781511CB2D3F80990033CFCC /* AlamofireHTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireHTTPClientTest.swift; sourceTree = "<group>"; };
 		783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClientTest.swift; sourceTree = "<group>"; };
@@ -224,17 +222,8 @@
 		781511C42D3F568F0033CFCC /* App */ = {
 			isa = PBXGroup;
 			children = (
-				781511C52D3F56920033CFCC /* Environment */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		781511C52D3F56920033CFCC /* Environment */ = {
-			isa = PBXGroup;
-			children = (
-				781511C62D3F56B00033CFCC /* EnvironmentsTest.swift */,
-			);
-			path = Environment;
 			sourceTree = "<group>";
 		};
 		781511CA2D3F807D0033CFCC /* Client */ = {
@@ -371,7 +360,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				781511B72D3F49FA0033CFCC /* MovieAppTests.swift in Sources */,
-				781511C72D3F56B00033CFCC /* EnvironmentsTest.swift in Sources */,
 				781511C92D3F7EE60033CFCC /* RemoteDataSourceTest.swift in Sources */,
 				783DDF4F2D3FE46300DD99AE /* MockURLProtocol.swift in Sources */,
 				783DDF4D2D3FD1E800DD99AE /* URLSessionClientTest.swift in Sources */,
