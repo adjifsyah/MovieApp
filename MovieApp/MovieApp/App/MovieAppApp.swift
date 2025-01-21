@@ -2,7 +2,7 @@
 //  MovieAppApp.swift
 //  MovieApp
 //
-//  Created by Adji Firmansyah on 20/01/25.
+//  Created by Apple Josal on 21/01/25.
 //
 
 import SwiftUI
