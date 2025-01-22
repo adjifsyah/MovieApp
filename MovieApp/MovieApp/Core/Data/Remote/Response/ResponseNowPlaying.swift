@@ -8,28 +8,28 @@
 import Foundation
 
 struct ResponseNowPlaying: Codable {
-    let dates: ResponseDate
     let page: Int
     let results: [ResponseMovie]
     let totalPages: Int
     let totalResults: Int
 
     enum CodingKeys: String, CodingKey {
-        case dates = "dates"
         case page = "page"
         case results = "results"
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
-}
-
-struct ResponseDate: Codable {
-    let maximum: String
-    let minimum: String
-
-    enum CodingKeys: String, CodingKey {
-        case maximum = "maximum"
-        case minimum = "minimum"
+    
+    internal init(
+        page: Int = 0,
+        results: [ResponseMovie] = [],
+        totalPages: Int = 0,
+        totalResults: Int = 0
+    ) {
+        self.page = page
+        self.results = results
+        self.totalPages = totalPages
+        self.totalResults = totalResults
     }
 }
 

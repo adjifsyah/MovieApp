@@ -48,10 +48,11 @@ class RemoteDataSource: RemoteDataSourceLmpl {
         }
         
         var components = URLComponents()
+        components.scheme = "https"
         components.host = configuration.host
-        components.path = "/3/movie\(endpoint)"
+        components.path = endpoint.contains("/3/movie") ? endpoint : "/3/movie\(endpoint)"
         components.queryItems = [
-            URLQueryItem(name: "apiKey", value: configuration.apiKey)
+            URLQueryItem(name: "api_key", value: configuration.apiKey)
         ]
         
         guard let params else {
