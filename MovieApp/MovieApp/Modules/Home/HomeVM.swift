@@ -31,6 +31,20 @@ extension HomeVM {
             .disposed(by: disposeBag)
     }
     
+    func navigateTo<Content: View>(movie: MovieModel, @ViewBuilder content: @escaping () -> Content) -> some View {
+        NavigationLink {
+            MovieDetailScreen(
+                viewModel: MovieDetailVM(
+                    movieID: movie.id,
+                    repository: self.repository
+                )
+            )
+        } label: {
+            content()
+        }
+
+    }
+    
     func imageURL(path: String) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w500" + path)
     }

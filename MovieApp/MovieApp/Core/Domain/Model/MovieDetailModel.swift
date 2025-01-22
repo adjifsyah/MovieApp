@@ -25,7 +25,9 @@ struct MovieDetailModel {
         backdropPath: String = "",
         posterPath: String = "",
         releaseDate: String = "",
-        id: Int = 0
+        voteAverage: Double = 0.0,
+        tagline: String = "",
+        voteCount: Int = 0
     ) {
         self.id = id
         self.title = title
@@ -33,6 +35,9 @@ struct MovieDetailModel {
         self.backdropPath = backdropPath
         self.posterPath = posterPath
         self.releaseDate = releaseDate
+        self.voteAverage = voteAverage
+        self.tagline = tagline
+        self.voteCount = voteCount
     }
 }
 

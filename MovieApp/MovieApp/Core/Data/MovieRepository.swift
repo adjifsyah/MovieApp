@@ -10,6 +10,7 @@ import RxSwift
 
 protocol MovieRepositoryLmpl {
     func fetchMovies() -> Observable<[MovieModel]>
+    func fetchMovieDetail(id: Int) -> Observable<MovieDetailModel>
 }
 
 class MovieRepository: MovieRepositoryLmpl {
@@ -34,11 +35,10 @@ extension MovieRepository {
             .filter({ !$0.isEmpty})
     }
     
-    func fetchMovieDetail(id: Int) -> Observable<[MovieModel]> {
-        self.remote.load(endpoint: "\(id)", method: "GET", params: nil)
+    func fetchMovieDetail(id: Int) -> Observable<MovieDetailModel> {
+        self.remote.load(endpoint: "/\(id)", method: "GET", params: nil)
             .map { (response: ResponseMovieDetail) in
-                MovieMapper.mapMovieResponseToDomain(input: response.results)
+                MovieMapper.mapMovieDetailResponseToDomain(input: response)
             }
-            .filter({ !$0.isEmpty})
     }
 }
