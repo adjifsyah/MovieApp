@@ -8,15 +8,18 @@
 import Foundation
 
 struct MovieDetailModel {
-    let id: Int
-    let title: String
-    let overview: String
-    let backdropPath: String
-    let posterPath: String
-    let releaseDate: String
-    let voteAverage: Double
-    let tagline: String
-    let voteCount: Int
+    var id: Int
+    var title: String
+    var overview: String
+    var backdropPath: String
+    var posterPath: String
+    var releaseDate: String
+    var tagline: String
+    var runtime: Int
+    var voteAverage: Double
+    var voteCount: Int
+    var genres: [Genre]
+    var productionCompanies: [ProductionCompany]
     
     init(
         id: Int = 0,
@@ -27,7 +30,10 @@ struct MovieDetailModel {
         releaseDate: String = "",
         voteAverage: Double = 0.0,
         tagline: String = "",
-        voteCount: Int = 0
+        runtime: Int = 0,
+        voteCount: Int = 0,
+        genres: [Genre] = [],
+        productionCompanies: [ProductionCompany] = []
     ) {
         self.id = id
         self.title = title
@@ -37,7 +43,10 @@ struct MovieDetailModel {
         self.releaseDate = releaseDate
         self.voteAverage = voteAverage
         self.tagline = tagline
+        self.runtime = runtime
         self.voteCount = voteCount
+        self.genres = genres
+        self.productionCompanies = productionCompanies
     }
 }
 

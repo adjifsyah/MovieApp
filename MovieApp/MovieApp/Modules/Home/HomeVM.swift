@@ -39,10 +39,10 @@ extension HomeVM {
                     repository: self.repository
                 )
             )
+            .navigationBarBackButtonHidden()
         } label: {
             content()
         }
-
     }
     
     func imageURL(path: String) -> URL? {

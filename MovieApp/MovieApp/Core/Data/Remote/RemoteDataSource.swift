@@ -29,11 +29,9 @@ class RemoteDataSource: RemoteDataSourceLmpl {
         return client.load(url: url, method: method, params: params)
             .map { data in
                 do {
-                    // Coba untuk mendekode data JSON menjadi objek tipe D
                     let decodedObject = try JSONDecoder().decode(D.self, from: data)
                     return decodedObject
                 } catch {
-                    // Menangani error decoding jika gagal
                     throw NSError(domain: "DecodingError", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Failed to decode response data."])
                 }
             }

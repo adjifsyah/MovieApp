@@ -20,8 +20,6 @@ struct HomeScreen: View {
                 LazyVStack(alignment: .leading, spacing: LayoutConstants.Spacing.medium) {
                     ForEach(viewModel.movies, id: \.id) { movie in
                         movieRow(movie)
-                        Rectangle()
-                            
                     }
                 }
                 .padding(.vertical, LayoutConstants.verticalPadding)
@@ -36,8 +34,14 @@ struct HomeScreen: View {
                                 viewModel.screenSize = size
                             }
                     }
+                        .overlay(
+                            Text("Saat ini film tidak tersedia.")
+                                .font(.system(size: 14))
+                                .opacity(viewModel.movies.isEmpty ? 1 : 0)
+                        )
                 )
             }
+            .background(.white)
             .toolbar(.automatic, for: .tabBar)
             .navigationTitle("Movies")
             .onAppear {
@@ -83,6 +87,7 @@ struct HomeScreen: View {
     HomeScreen(
         viewModel: HomeVM(
             repository: MovieRepository.sharedInstance(
+                CoreDataDataSource(), 
                 RemoteDataSource(
                     configuration: .shared,
                     client: AlamofireClients()

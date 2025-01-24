@@ -35,6 +35,7 @@ struct MainView: View {
         HomeScreen(
             viewModel: HomeVM(
                 repository: MovieRepository.sharedInstance(
+                    CoreDataDataSource(),
                     RemoteDataSource(
                         configuration: .shared,
                         client: AlamofireClients()
@@ -45,7 +46,17 @@ struct MainView: View {
     }
     
     var favorite: some View {
-        FavoriteScreen()
+        FavoriteScreen(
+            viewModel: FavoriteVM(
+                repository: MovieRepository.sharedInstance(
+                    CoreDataDataSource(),
+                    RemoteDataSource(
+                        configuration: .shared,
+                        client: AlamofireClients()
+                    )
+                )
+            )
+        )
     }
     
     var profile: some View {
