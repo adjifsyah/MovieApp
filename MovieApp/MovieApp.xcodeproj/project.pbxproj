@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,9 @@
 		CFBF722C2D43F1D700BAECF9 /* MovieDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF722B2D43F1D700BAECF9 /* MovieDetailInteractor.swift */; };
 		CFBF722E2D43F9D000BAECF9 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF722D2D43F9D000BAECF9 /* FavoriteInteractor.swift */; };
 		CFBF72302D43FA7A00BAECF9 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF722F2D43FA7A00BAECF9 /* FavoriteRouter.swift */; };
+		CFBF72442D4483C300BAECF9 /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */; };
+		CFBF72452D4483C300BAECF9 /* MovieEntities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */; };
+		CFBF72462D4483C300BAECF9 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF72412D4483C300BAECF9 /* PersistenceController.swift */; };
 		CFCE84F52D42A01700CACCFF /* CustomError+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE84F42D42A01700CACCFF /* CustomError+Ext.swift */; };
 		CFEBEBDE2D3FF92C00CF5638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEBEBDD2D3FF92C00CF5638 /* Assets.xcassets */; };
 		CFEBEBE72D3FFAFB00CF5638 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBEBE62D3FFAFB00CF5638 /* MovieRepository.swift */; };
@@ -96,14 +99,13 @@
 		CFBF722B2D43F1D700BAECF9 /* MovieDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailInteractor.swift; sourceTree = "<group>"; };
 		CFBF722D2D43F9D000BAECF9 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
 		CFBF722F2D43FA7A00BAECF9 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
+		CFBF72412D4483C300BAECF9 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieEntities.xcdatamodel; sourceTree = "<group>"; };
 		CFCE84F42D42A01700CACCFF /* CustomError+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomError+Ext.swift"; sourceTree = "<group>"; };
 		CFEBEBDD2D3FF92C00CF5638 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEBEBE62D3FFAFB00CF5638 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		CFCE84E52D429C7400CACCFF /* Locale */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Locale; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7815117E2D3F451B0033CFCC /* Frameworks */ = {
@@ -187,7 +189,7 @@
 		781511942D3F452C0033CFCC /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CFCE84E52D429C7400CACCFF /* Locale */,
+				CFBF72422D4483C300BAECF9 /* Locale */,
 				781511962D3F45340033CFCC /* Client */,
 				781511952D3F452F0033CFCC /* Remote */,
 				CFEBEBE62D3FFAFB00CF5638 /* MovieRepository.swift */,
@@ -381,6 +383,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CFBF72422D4483C300BAECF9 /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */,
+				CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */,
+				CFBF72412D4483C300BAECF9 /* PersistenceController.swift */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -395,9 +407,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				CFCE84E52D429C7400CACCFF /* Locale */,
 			);
 			name = MovieApp;
 			packageProductDependencies = (
@@ -513,6 +522,9 @@
 				CF98731C2D4151F20061E79B /* MovieModel.swift in Sources */,
 				CFBF72302D43FA7A00BAECF9 /* FavoriteRouter.swift in Sources */,
 				CF98730B2D4151E20061E79B /* MainView.swift in Sources */,
+				CFBF72442D4483C300BAECF9 /* LocaleDataSource.swift in Sources */,
+				CFBF72452D4483C300BAECF9 /* MovieEntities.xcdatamodeld in Sources */,
+				CFBF72462D4483C300BAECF9 /* PersistenceController.swift in Sources */,
 				CF98730C2D4151E20061E79B /* ProfileScreen.swift in Sources */,
 				781511852D3F451B0033CFCC /* MovieAppApp.swift in Sources */,
 				CFBF722C2D43F1D700BAECF9 /* MovieDetailInteractor.swift in Sources */,
@@ -846,6 +858,19 @@
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */,
+			);
+			currentVersion = CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */;
+			path = MovieEntities.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 781511792D3F451B0033CFCC /* Project object */;
 }
