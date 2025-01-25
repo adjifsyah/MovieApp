@@ -8,13 +8,9 @@
 import SwiftUI
 import RxSwift
 
-class MovieDetailVM: ObservableObject {
-    @Published var movieDetail: MovieDetailModel = .init() {
-        didSet {
-            checkFavorite()
-        }
-    }
-    private let repository: MovieRepositoryLmpl
+class MovieDetailPresenter: ObservableObject {
+    @Published var movieDetail: MovieDetailModel = .init()
+    private let useCase: MovieDetailUseCase
     private let disposeBag = DisposeBag()
     private let movieID: Int
     
@@ -29,9 +25,9 @@ class MovieDetailVM: ObservableObject {
     @Published var screenSize: CGSize = .zero
     @Published var onDelete: (() -> Void)? = nil
     
-    init(movieID id: Int, repository: MovieRepositoryLmpl, isFromFavorite: Bool = false, onDelete: (() -> Void)? = nil) {
+    init(movieID id: Int, isFromFavorite: Bool = false, useCase: MovieDetailUseCase, onDelete: (() -> Void)? = nil) {
         self.movieID = id
-        self.repository = repository
+        self.useCase = useCase
         self.onDelete = onDelete
         self.isFromFavorite = isFromFavorite
         fetchMovieDetail()
@@ -39,26 +35,14 @@ class MovieDetailVM: ObservableObject {
     
     func fetchMovieDetail() {
         isLoading = true
-        repository.fetchMovieDetail(id: movieID)
+        useCase.fetchMovieDetail(id: movieID)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
                 self.movieDetail = result
+                self.checkFavorite()
                 self.isLoading = false
             }, onError: { error in
-                print(error.localizedDescription)
                 self.isLoading = false
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func checkFavorite() {
-        repository.getFavorite()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { result in
-                self.isFavorite = result.filter({ $0.id == self.movieID }).isEmpty == false
-            }, onError: { _ in
-                self.msgError = "Gagal mendapatkan data favorite"
-                self.isShowAlert = true
             })
             .disposed(by: disposeBag)
     }
@@ -71,12 +55,25 @@ class MovieDetailVM: ObservableObject {
         }
     }
     
+    func checkFavorite() {
+        useCase.getFavorite(id: movieDetail.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { result in
+                self.isFavorite = self.movieDetail.id == result.id
+            }, onError: { _ in
+                self.msgError = "Gagal mendapatkan data favorite"
+                self.isShowAlert = true
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func saveFavorite() {
-        repository.addMovieToFavorite(movie: movieDetail)
+        useCase.addFavorite(movie: movieDetail)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
                 self.movieDetail = result
                 self.msgError = "Berhasil menambahkan favorit"
+                self.isFavorite = self.movieDetail.id == result.id
                 self.isShowAlert = true
             }, onError: { error in
                 self.msgError = (error as? DatabaseError)?.errorDescription ?? ""
@@ -86,7 +83,7 @@ class MovieDetailVM: ObservableObject {
     }
     
     func deleteFavorite() {
-        repository.deleteFavorite(id: movieID)
+        useCase.deleteFavorite(id: movieID)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { isSuccess in
                 self.isFavorite = !(isSuccess == true)

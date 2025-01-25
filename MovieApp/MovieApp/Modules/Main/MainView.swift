@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var homePresenter: HomePresenter
+    @EnvironmentObject var favoritePresenter: FavoritePresenter
+    
     var body: some View {
         TabView {
             home
@@ -32,31 +35,11 @@ struct MainView: View {
     }
     
     var home: some View {
-        HomeScreen(
-            viewModel: HomeVM(
-                repository: MovieRepository.sharedInstance(
-                    CoreDataDataSource(),
-                    RemoteDataSource(
-                        configuration: .shared,
-                        client: AlamofireClients()
-                    )
-                )
-            )
-        )
+        HomeScreen(presenter: homePresenter)
     }
     
     var favorite: some View {
-        FavoriteScreen(
-            viewModel: FavoriteVM(
-                repository: MovieRepository.sharedInstance(
-                    CoreDataDataSource(),
-                    RemoteDataSource(
-                        configuration: .shared,
-                        client: AlamofireClients()
-                    )
-                )
-            )
-        )
+        FavoriteScreen(presenter: favoritePresenter)
     }
     
     var profile: some View {

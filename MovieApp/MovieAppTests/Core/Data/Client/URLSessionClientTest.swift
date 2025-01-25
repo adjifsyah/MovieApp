@@ -78,7 +78,6 @@ class URLSessionClientTest: XCTestCase {
             .subscribe(
                 onError: { error in
                     let error = (error as NSError)
-                    print("ERROR MESSAGE ", error.domain)
                     XCTAssertEqual((error as NSError).domain, "MockError")
                     expectation.fulfill()
                 }

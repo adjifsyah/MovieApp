@@ -16,9 +16,13 @@ class RemoteDataSource: RemoteDataSourceLmpl {
     private let configuration: NetworkConfiguration
     private let client: HttpClient
     
-    init(configuration: NetworkConfiguration, client: HttpClient) {
+    private init(configuration: NetworkConfiguration, client: HttpClient) {
         self.configuration = configuration
         self.client = client
+    }
+    
+    static let sharedInstance: ((NetworkConfiguration, HttpClient) -> RemoteDataSourceLmpl) = { configuration, client in
+        RemoteDataSource(configuration: configuration, client: client)
     }
     
     func load<D>(endpoint: String, method: String, params: [String: String]? = nil) -> Observable<D> where D : Decodable {

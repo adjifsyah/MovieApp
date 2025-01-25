@@ -10,22 +10,19 @@ import RxSwift
 import Kingfisher
 
 struct FavoriteScreen: View {
-    @StateObject var viewModel: FavoriteVM
+    @StateObject var presenter: FavoritePresenter
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    ForEach(viewModel.listFavorite, id: \.id) { movie in
-                        viewModel.navigateTo(movie: movie) {
+                    ForEach(presenter.listFavorite, id: \.id) { movie in
+                        presenter.navigateTo(movie: movie) {
                             rowView(movie)
                         }
                     }
                 }
                 .padding(.horizontal, LayoutConstants.sidePadding)
-                .onAppear {
-                    print("ONAPPEARAR")
-                }
             }
             .background(.white)
             .toolbar(.automatic, for: .tabBar)
@@ -34,10 +31,10 @@ struct FavoriteScreen: View {
         .overlay(
             Text("Simpan film favorit anda sekarang")
                 .font(.system(size: 14))
-                .opacity(viewModel.listFavorite.isEmpty ? 1 : 0)
+                .opacity(presenter.listFavorite.isEmpty ? 1 : 0)
         )
         .onAppear {
-            viewModel.fetchFavorite()
+            presenter.fetchFavorite()
         }
     }
     
@@ -55,7 +52,7 @@ struct FavoriteScreen: View {
                         .font(.system(size: 14, weight: .bold))
                         .foregroundStyle(.black)
                     
-                    viewModel.rateView(movie: movie) { rate in
+                    presenter.rateView(movie: movie) { rate in
                         HStack(spacing: 4) {
                             HStack(spacing: 2) {
                                 ForEach(0..<5, id: \.self) { index in
@@ -67,9 +64,6 @@ struct FavoriteScreen: View {
                                         .scaledToFit()
                                         .frame(width: 12)
                                         .foregroundStyle(.orange)
-                                        .onAppear {
-                                            print(rate)
-                                        }
                                 }
                             }
                             
@@ -89,9 +83,9 @@ struct FavoriteScreen: View {
                         .padding(.bottom, 4)
                 }
             }
-            .padding(.vertical, LayoutConstants.verticalPadding)
+            .padding(.vertical, 10)
             
-            if viewModel.listFavorite.last?.id != movie.id {
+            if presenter.listFavorite.last?.id != movie.id {
                 Divider()
             }
         }
@@ -100,47 +94,38 @@ struct FavoriteScreen: View {
 
 #Preview {
     FavoriteScreen(
-        viewModel: FavoriteVM(
-            repository: MovieRepository.sharedInstance(
-                CoreDataDataSource(),
-                RemoteDataSource(
-                    configuration: .shared,
-                    client: AlamofireClients()
-                )
-            )
+        presenter: FavoritePresenter(
+            useCases: Injection().provideFavoriteUseCase()
         )
     )
 }
 
-class FavoriteVM: ObservableObject {
+class FavoritePresenter: ObservableObject {
     @Published var listFavorite: [MovieDetailModel] = []
     @Published var isOnAppear: Bool = false
     
-    let repository: MovieRepositoryLmpl
+    @Published var isAlert: Bool = false
+    @Published var msgAlert: String = ""
+    
+    let router = FavoriteRouter()
+    let useCase: FavoriteUseCase
     private let disposeBag = DisposeBag()
     
-    init(repository: MovieRepositoryLmpl) {
-        self.repository = repository
+    init(useCases: FavoriteUseCase) {
+        self.useCase = useCases
     }
 }
 
-extension FavoriteVM {
+extension FavoritePresenter {
     func rateView<Content: View>(movie: MovieDetailModel, @ViewBuilder content: (String) -> Content) -> some View {
         content(String(convertToFiveStarScale(voteAverage: movie.voteAverage)))
     }
     
     func navigateTo<Content: View>(movie: MovieDetailModel, @ViewBuilder content: @escaping () -> Content) -> some View {
         NavigationLink {
-            MovieDetailScreen(
-                viewModel: MovieDetailVM(
-                    movieID: movie.id,
-                    repository: self.repository,
-                    isFromFavorite: true,
-                    onDelete: {
-                        self.fetchFavorite()
-                    }
-                )
-            )
+            router.makeDetailView(id: movie.id, isFromFavorite: true, onDelete: {
+                self.fetchFavorite()
+            })
             .navigationBarBackButtonHidden()
         } label: {
             content()
@@ -148,12 +133,13 @@ extension FavoriteVM {
     }
     
     func fetchFavorite() {
-        repository.getFavorite()
+        useCase.getFavorite()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
                 self.listFavorite = result
             }, onError: { error in
-                print(error.localizedDescription)
+                self.msgAlert = error.localizedDescription
+                self.isAlert = true
             })
             .disposed(by: disposeBag)
     }

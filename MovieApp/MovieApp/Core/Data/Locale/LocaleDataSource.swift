@@ -19,6 +19,10 @@ protocol LocaleDataSourceLmpl {
 class CoreDataDataSource: LocaleDataSourceLmpl {
     let persistence = PersistenceController.shared
     
+    private init() { }
+    
+    static let sharedInstance: LocaleDataSourceLmpl = CoreDataDataSource()
+    
     func getFavorite() -> Observable<[MovieDetailModel]> {
         return Observable.create { observer in
             let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()

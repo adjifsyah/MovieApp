@@ -9,16 +9,13 @@ import SwiftUI
 import Kingfisher
 
 struct HomeScreen: View {
-    @StateObject private var viewModel: HomeVM
-
-    init(viewModel: HomeVM) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var presenter: HomePresenter
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: LayoutConstants.Spacing.medium) {
-                    ForEach(viewModel.movies, id: \.id) { movie in
+                    ForEach(presenter.movies, id: \.id) { movie in
                         movieRow(movie)
                     }
                 }
@@ -28,16 +25,16 @@ struct HomeScreen: View {
                     GeometryReader { proxy in
                         Color.clear
                             .onAppear {
-                                viewModel.screenSize = proxy.size
+                                presenter.screenSize = proxy.size
                             }
                             .onChange(of: proxy.size) { size in
-                                viewModel.screenSize = size
+                                presenter.screenSize = size
                             }
                     }
                         .overlay(
                             Text("Saat ini film tidak tersedia.")
                                 .font(.system(size: 14))
-                                .opacity(viewModel.movies.isEmpty ? 1 : 0)
+                                .opacity(presenter.movies.isEmpty ? 1 : 0)
                         )
                 )
             }
@@ -45,8 +42,7 @@ struct HomeScreen: View {
             .toolbar(.automatic, for: .tabBar)
             .navigationTitle("Movies")
             .onAppear {
-                print("ON appear")
-                viewModel.fetchNowPlaying()
+                presenter.fetchNowPlaying()
             }
 
         }
@@ -55,7 +51,7 @@ struct HomeScreen: View {
     }
     
     func movieRow(_ movie: MovieModel) -> some View {
-        viewModel.navigateTo(movie: movie) {
+        presenter.navigateTo(movie: movie) {
             ZStack(alignment: .bottomLeading) {
                 KFImage(movie.backdropPath.toImageURL)
                     .resizable()
@@ -75,7 +71,7 @@ struct HomeScreen: View {
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 10)
-                .frame(width: viewModel.screenSize.width - (LayoutConstants.sidePadding * 2))
+                .frame(width: presenter.screenSize.width - (LayoutConstants.sidePadding * 2))
                 
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
@@ -85,14 +81,8 @@ struct HomeScreen: View {
 
 #Preview {
     HomeScreen(
-        viewModel: HomeVM(
-            repository: MovieRepository.sharedInstance(
-                CoreDataDataSource(), 
-                RemoteDataSource(
-                    configuration: .shared,
-                    client: AlamofireClients()
-                )
-            )
+        presenter: HomePresenter(
+            useCase: Injection().provideHomeUseCase()
         )
     )
 }

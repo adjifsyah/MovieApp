@@ -10,13 +10,13 @@ import Kingfisher
 
 struct MovieDetailScreen: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel: MovieDetailVM
+    @StateObject var presenter: MovieDetailPresenter
     @State var adaptiveColumn: [GridItem] = []
     
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .topLeading) {
-                KFImage(viewModel.movieDetail.backdropPath.toImageURL)
+                KFImage(presenter.movieDetail.backdropPath.toImageURL)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height * 0.5)
@@ -26,26 +26,26 @@ struct MovieDetailScreen: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         HStack(alignment: .top) {
-                            KFImage(viewModel.movieDetail.posterPath.toImageURL)
+                            KFImage(presenter.movieDetail.posterPath.toImageURL)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                             VStack(alignment: .leading, spacing: 2) {
                                 // "viewModel.movieDetail.title
-                                Text(viewModel.movieDetail.title)
+                                Text(presenter.movieDetail.title)
                                     .font(.system(size: 18, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                Text(viewModel.movieDetail.genres.map({ $0.name }).joined(separator: ", ") )
+                                Text(presenter.movieDetail.genres.map({ $0.name }).joined(separator: ", ") )
                                     .font(.system(size: 12))
                                     .foregroundStyle(.gray)
                                 
-                                Text(viewModel.formatTime(minutes: viewModel.movieDetail.runtime))
+                                Text(presenter.formatTime(minutes: presenter.movieDetail.runtime))
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundStyle(.gray)
                                 Spacer()
-                                viewModel.rateView { rate in
+                                presenter.rateView { rate in
                                     HStack(spacing: 8) {
                                         HStack(spacing: 2) {
                                             ForEach(0..<5, id: \.self) { index in
@@ -57,9 +57,6 @@ struct MovieDetailScreen: View {
                                                     .scaledToFit()
                                                     .frame(width: 12)
                                                     .foregroundStyle(.orange)
-                                                    .onAppear {
-                                                        print(rate)
-                                                    }
                                             }
                                         }
                                         Text(rate)
@@ -106,7 +103,7 @@ struct MovieDetailScreen: View {
                                     .font(.system(size: 14, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                viewModel.overview { text in
+                                presenter.overview { text in
                                     Text(text)
                                 }
                             }
@@ -118,7 +115,7 @@ struct MovieDetailScreen: View {
                         }
                         .background(.white)
                     }
-                    .padding(.top, viewModel.screenSize.height / 3 - 24)
+                    .padding(.top, presenter.screenSize.height / 3 - 24)
                     
                     
                     .toolbar(.hidden, for: .tabBar)
@@ -143,13 +140,13 @@ struct MovieDetailScreen: View {
                             Spacer()
                             
                             Button {
-                                viewModel.onTapFavoriteBTN()
+                                presenter.onTapFavoriteBTN()
                             } label: {
                                 Image(systemName: "heart.fill")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 16)
-                                    .foregroundStyle(viewModel.isFavorite ? .red : .black)
+                                    .foregroundStyle(presenter.isFavorite ? .red : .black)
                                     .padding(10)
                                     .background(.white)
                                     .clipShape(Circle())
@@ -165,21 +162,21 @@ struct MovieDetailScreen: View {
                 .ignoresSafeArea(edges: .top)
             }
             .overlay(
-                ActivityIndicator(isAnimating: $viewModel.isLoading, style: .large)
+                ActivityIndicator(isAnimating: $presenter.isLoading, style: .large)
             )
-            .alert(viewModel.msgError, isPresented: $viewModel.isShowAlert) {
+            .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
                 Button("Oke", role: .cancel) {
-                    if viewModel.isFromFavorite {
-                        viewModel.onDelete?()
+                    if presenter.isFromFavorite {
+                        presenter.onDelete?()
                         dismiss()
                     }
                 }
             }
-            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $viewModel.isAlertConfirmation) {
+            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $presenter.isAlertConfirmation) {
                 Button("Batal", role: .cancel) { }
                 
                 Button("Yakin", role: .destructive) {
-                    viewModel.deleteFavorite()
+                    presenter.deleteFavorite()
                 }
             }
             .onAppear {
@@ -201,7 +198,7 @@ struct MovieDetailScreen: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .bottom, spacing: 24) {
-                    ForEach(viewModel.movieDetail.productionCompanies, id: \.id) { production in
+                    ForEach(presenter.movieDetail.productionCompanies, id: \.id) { production in
                         VStack(spacing: 4) {
                             if production.logoPath != "" {
                                 KFImage(production.logoPath.toImageURL)
@@ -228,15 +225,9 @@ struct MovieDetailScreen: View {
 
 #Preview {
     MovieDetailScreen(
-        viewModel: MovieDetailVM(
+        presenter: MovieDetailPresenter(
             movieID: 939243,
-            repository: MovieRepository.sharedInstance(
-                CoreDataDataSource(),
-                RemoteDataSource(
-                    configuration: .shared,
-                    client: AlamofireClients()
-                )
-            )
+            useCase: Injection().provideDetailsUseCase()
         )
     )
 }
