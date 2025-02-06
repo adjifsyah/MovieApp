@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct MovieAppApp: App {
+    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
+    let favoritePresenter = FavoritePresenter(useCases: Injection().provideFavoriteUseCase())
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(homePresenter)
+                .environmentObject(favoritePresenter)
         }
     }
 }
