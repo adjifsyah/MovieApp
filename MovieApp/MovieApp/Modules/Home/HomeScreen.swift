@@ -23,13 +23,24 @@ struct HomeScreen: View {
                 .padding(.horizontal, LayoutConstants.sidePadding)
                 .background(
                     GeometryReader { proxy in
-                        Color.clear
-                            .onAppear {
-                                presenter.screenSize = proxy.size
-                            }
-                            .onChange(of: proxy.size) { size in
-                                presenter.screenSize = size
-                            }
+                        if #available(iOS 17.0, *) {
+                            Color.clear
+                                .onAppear {
+                                    presenter.screenSize = proxy.size
+                                }
+                                .onChange(of: proxy.size) { _, size in
+                                    presenter.screenSize = size
+                                }
+                        } else {
+                            // Fallback on earlier versions
+                            Color.clear
+                                .onAppear {
+                                    presenter.screenSize = proxy.size
+                                }
+                                .onChange(of: proxy.size) { size in
+                                    presenter.screenSize = size
+                                }
+                        }
                     }
                         .overlay(
                             Text("Saat ini film tidak tersedia.")
