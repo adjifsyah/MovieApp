@@ -25,9 +25,17 @@ workflows:
     triggering:
       events:
         - push
+      branch_patterns:
+        - pattern: 'main'
+          include: true
+          source: false
+      cancel_previous_builds: true
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
     publishing:
       email:
         recipients:
           - adji.firmansyah27@gmail.com # Isikan email untuk notifikasi status building.
+        notify:
+          success: true
+          failure: false
