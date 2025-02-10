@@ -10,6 +10,7 @@ workflows:
     working_directory: MovieApp # Hapus jika MovieApp.xcodeproj ada di root repo
     scripts:
       - name: Run tests
+        working_directory: MovieApp
         script: |
           xcodebuild \
           -project "$XCODE_PROJECT" \
@@ -20,6 +21,7 @@ workflows:
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: Build debug app
+        working_directory: MovieApp
         script: |
           xcodebuild \
           build -project "$XCODE_PROJECT" \
