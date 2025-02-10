@@ -71,7 +71,7 @@ class AlamofireHTTPClientTest: XCTestCase {
                 onError: { error in
                     if let afError = error as? AFError,
                        let underlyingError = afError.underlyingError as NSError? {
-                        XCTAssertEqual(underlyingError.domain, "MockErrors")
+                        XCTAssertEqual(underlyingError.domain, "MockErrorss")
                         XCTAssertEqual(underlyingError.code, 100)
                         expectation.fulfill()
                     }
