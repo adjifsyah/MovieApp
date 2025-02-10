@@ -61,7 +61,7 @@ class AlamofireHTTPClientTest: XCTestCase {
         config.protocolClasses = [MockURLProtocol.self]
         client = AlamofireClients(URLSessionConfig: config)
         
-        MockURLProtocol.stubError = NSError(domain: "MockError", code: 1001)
+        MockURLProtocol.stubError = NSError(domain: "MockErro", code: 1001)
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
@@ -72,7 +72,7 @@ class AlamofireHTTPClientTest: XCTestCase {
                     if let afError = error as? AFError,
                        let underlyingError = afError.underlyingError as NSError? {
                         XCTAssertEqual(underlyingError.domain, "MockError")
-                        XCTAssertEqual(underlyingError.code, 1001)
+                        XCTAssertEqual(underlyingError.code, 100)
                         expectation.fulfill()
                     }
                 }
