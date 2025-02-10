@@ -4,8 +4,6 @@
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
-<<<<<<< HEAD
-=======
     },
     {
       "appearances" : [
@@ -28,7 +26,6 @@
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
->>>>>>> DEV
     }
   ],
   "info" : {
