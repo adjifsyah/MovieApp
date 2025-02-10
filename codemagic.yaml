@@ -7,10 +7,10 @@ workflows:
       vars:
           XCODE_PROJECT: "MovieApp.xcodeproj" # Isikan nama project Anda.
           XCODE_SCHEME: "MovieApp" # Isikan nama scheme project Anda.
+    working_directory: MovieApp
     scripts:
       - name: Run tests
         script: |
-          cd MovieApp
           xcodebuild \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
