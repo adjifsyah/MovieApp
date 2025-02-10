@@ -98,9 +98,12 @@ Packages
 xcuserdata
 *.xcodeproj
 
+<<<<<<< HEAD
+=======
 # Ignore Mac DS_Store files
 .DS_Store
 **/.DS_Store
+>>>>>>> DEV
 
 ### Xcode ###
 
@@ -114,5 +117,9 @@ xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+<<<<<<< HEAD
+.DS_Store
+=======
+>>>>>>> DEV
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,swiftpackagemanager,swift

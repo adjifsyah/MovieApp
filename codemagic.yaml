@@ -1,50 +1,41 @@
 workflows:
-  ios-project-debug: # Workflow ID
-    name: iOS Debug # Workflow Name
+  ios-project-debug: # workflow ID
+    name: iOS debug # workflow name
     environment:
       xcode: latest
       cocoapods: default
       vars:
-        XCODE_PROJECT: "MovieApp.xcodeproj" # Pastikan nama project benar
-        XCODE_SCHEME: "MovieApp" # Pastikan scheme ini sudah shared
-    working_directory: MovieApp # Hapus jika MovieApp.xcodeproj ada di root repo
+          XCODE_PROJECT: "MovieApp.xcodeproj" # Isikan nama project Anda.
+          XCODE_SCHEME: "MovieApp" # Isikan nama scheme project Anda.
+    working_directory: MovieApp
     scripts:
       - name: Run tests
-        working_directory: MovieApp
         script: |
           xcodebuild \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' \
-          clean build test \
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-
+          clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Build debug app
-        working_directory: MovieApp
         script: |
-          xcodebuild \
-          build -project "$XCODE_PROJECT" \
+          xcodebuild build -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
-
     triggering:
-        events:                       # List the events that trigger builds
-            - push
-        branch_patterns:
-            - pattern: 'DEV'
-                include: true
-                source: true
-        cancel_previous_builds: true
-
-
+      events:
+        - push
+      branch_patterns:
+        - pattern: 'main'
+          include: true
+          source: false
+      cancel_previous_builds: true
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-
     publishing:
       email:
         recipients:
-          - adji.firmansyah27@gmail.com # Email untuk notifikasi build status
+          - adji.firmansyah27@gmail.com # Isikan email untuk notifikasi status building.
         notify:
           success: true
-          failure: true
+          failure: false
