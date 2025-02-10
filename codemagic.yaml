@@ -10,6 +10,7 @@ workflows:
     scripts:
       - name: Run tests
         script: |
+          cd MovieApp
           xcodebuild \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
