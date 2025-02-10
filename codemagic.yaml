@@ -32,7 +32,7 @@ workflows:
         events:                       # List the events that trigger builds
             - push
         branch_patterns:
-            - pattern: 'DEV'
+            - pattern: 'main'
                 include: true
                 source: true
         cancel_previous_builds: true
