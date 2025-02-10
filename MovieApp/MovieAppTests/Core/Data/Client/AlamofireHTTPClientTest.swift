@@ -61,7 +61,7 @@ class AlamofireHTTPClientTest: XCTestCase {
         config.protocolClasses = [MockURLProtocol.self]
         client = AlamofireClients(URLSessionConfig: config)
         
-        MockURLProtocol.stubError = NSError(domain: "MockErro", code: 100)
+        MockURLProtocol.stubError = NSError(domain: "MockError", code: 1001)
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
