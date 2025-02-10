@@ -29,13 +29,14 @@ workflows:
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
     triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: 'DEV' # Jalankan hanya saat push ke branch DEV
-          include: true
-          source: false
-      cancel_previous_builds: true
+        events:                       # List the events that trigger builds
+            - push
+        branch_patterns:
+            - pattern: 'DEV'
+                include: true
+                source: true
+        cancel_previous_builds: true
+
 
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
