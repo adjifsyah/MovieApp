@@ -34,7 +34,7 @@ workflows:
       branch_patterns:
         - pattern: 'DEV' # Jalankan hanya saat push ke branch DEV
           include: true
-          source: false
+          source: true
       cancel_previous_builds: true
 
     artifacts:
