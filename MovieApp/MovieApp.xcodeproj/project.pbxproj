@@ -23,6 +23,10 @@
 		783DDF4D2D3FD1E800DD99AE /* URLSessionClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */; };
 		783DDF4F2D3FE46300DD99AE /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF4E2D3FE46300DD99AE /* MockURLProtocol.swift */; };
 		783DDF512D3FE51F00DD99AE /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783DDF502D3FE51F00DD99AE /* URLSessionClient.swift */; };
+		78DA24DD2D62E5310000DDB0 /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA24DC2D62E5310000DDB0 /* MovieEntity.swift */; };
+		78DA24DF2D62E6830000DDB0 /* RealmDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA24DE2D62E6830000DDB0 /* RealmDataSource.swift */; };
+		78DA24E12D62E9EE0000DDB0 /* Results+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA24E02D62E9EE0000DDB0 /* Results+Ext.swift */; };
+		78DA24E42D62EC140000DDB0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 78DA24E32D62EC140000DDB0 /* RealmSwift */; };
 		CF8D28542D40223700EF4B41 /* ResponseMovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8D28532D40223700EF4B41 /* ResponseMovieDetail.swift */; };
 		CF9873062D4151E20061E79B /* MovieDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872F92D4151E20061E79B /* MovieDetailScreen.swift */; };
 		CF9873072D4151E20061E79B /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872FA2D4151E20061E79B /* MovieDetailPresenter.swift */; };
@@ -44,8 +48,6 @@
 		CFBF722E2D43F9D000BAECF9 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF722D2D43F9D000BAECF9 /* FavoriteInteractor.swift */; };
 		CFBF72302D43FA7A00BAECF9 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF722F2D43FA7A00BAECF9 /* FavoriteRouter.swift */; };
 		CFBF72442D4483C300BAECF9 /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */; };
-		CFBF72452D4483C300BAECF9 /* MovieEntities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */; };
-		CFBF72462D4483C300BAECF9 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF72412D4483C300BAECF9 /* PersistenceController.swift */; };
 		CFCE84F52D42A01700CACCFF /* CustomError+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCE84F42D42A01700CACCFF /* CustomError+Ext.swift */; };
 		CFEBEBDE2D3FF92C00CF5638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEBEBDD2D3FF92C00CF5638 /* Assets.xcassets */; };
 		CFEBEBE72D3FFAFB00CF5638 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBEBE62D3FFAFB00CF5638 /* MovieRepository.swift */; };
@@ -79,6 +81,9 @@
 		783DDF4C2D3FD1E800DD99AE /* URLSessionClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClientTest.swift; sourceTree = "<group>"; };
 		783DDF4E2D3FE46300DD99AE /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		783DDF502D3FE51F00DD99AE /* URLSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
+		78DA24DC2D62E5310000DDB0 /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
+		78DA24DE2D62E6830000DDB0 /* RealmDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataSource.swift; sourceTree = "<group>"; };
+		78DA24E02D62E9EE0000DDB0 /* Results+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+Ext.swift"; sourceTree = "<group>"; };
 		CF8D28532D40223700EF4B41 /* ResponseMovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMovieDetail.swift; sourceTree = "<group>"; };
 		CF9872F92D4151E20061E79B /* MovieDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailScreen.swift; sourceTree = "<group>"; };
 		CF9872FA2D4151E20061E79B /* MovieDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailPresenter.swift; sourceTree = "<group>"; };
@@ -100,8 +105,6 @@
 		CFBF722D2D43F9D000BAECF9 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
 		CFBF722F2D43FA7A00BAECF9 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
 		CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
-		CFBF72412D4483C300BAECF9 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
-		CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieEntities.xcdatamodel; sourceTree = "<group>"; };
 		CFCE84F42D42A01700CACCFF /* CustomError+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomError+Ext.swift"; sourceTree = "<group>"; };
 		CFEBEBDD2D3FF92C00CF5638 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFEBEBE62D3FFAFB00CF5638 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 				CFEBEBF32D40092300CF5638 /* Kingfisher in Frameworks */,
 				781511AB2D3F462B0033CFCC /* Alamofire in Frameworks */,
 				781511A32D3F45E30033CFCC /* RxSwift in Frameworks */,
+				78DA24E42D62EC140000DDB0 /* RealmSwift in Frameworks */,
 				781511A12D3F45E30033CFCC /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +292,14 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
+		78DA24DB2D62E5160000DDB0 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				78DA24DC2D62E5310000DDB0 /* MovieEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		CF9872FB2D4151E20061E79B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				CF98730D2D4151E60061E79B /* KeyedDecodingContainer+Ext.swift */,
+				78DA24E02D62E9EE0000DDB0 /* Results+Ext.swift */,
 				CF98730E2D4151E60061E79B /* String+Ext.swift */,
 				CFCE84F42D42A01700CACCFF /* CustomError+Ext.swift */,
 			);
@@ -386,9 +399,9 @@
 		CFBF72422D4483C300BAECF9 /* Locale */ = {
 			isa = PBXGroup;
 			children = (
+				78DA24DB2D62E5160000DDB0 /* Entity */,
 				CFBF723F2D4483C300BAECF9 /* LocaleDataSource.swift */,
-				CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */,
-				CFBF72412D4483C300BAECF9 /* PersistenceController.swift */,
+				78DA24DE2D62E6830000DDB0 /* RealmDataSource.swift */,
 			);
 			path = Locale;
 			sourceTree = "<group>";
@@ -414,6 +427,7 @@
 				781511A22D3F45E30033CFCC /* RxSwift */,
 				781511AA2D3F462B0033CFCC /* Alamofire */,
 				CFEBEBF22D40092300CF5638 /* Kingfisher */,
+				78DA24E32D62EC140000DDB0 /* RealmSwift */,
 			);
 			productName = MovieApp;
 			productReference = 781511812D3F451B0033CFCC /* MovieApp.app */;
@@ -469,6 +483,8 @@
 				7815119F2D3F45E30033CFCC /* XCRemoteSwiftPackageReference "RxSwift" */,
 				781511A92D3F462B0033CFCC /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				78DA24D52D62DFBA0000DDB0 /* XCRemoteSwiftPackageReference "Core" */,
+				78DA24E22D62EC140000DDB0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 781511822D3F451B0033CFCC /* Products */;
 			projectDirPath = "";
@@ -506,6 +522,7 @@
 			files = (
 				CF8D28542D40223700EF4B41 /* ResponseMovieDetail.swift in Sources */,
 				CF9873172D4151EB0061E79B /* MovieMapper.swift in Sources */,
+				78DA24E12D62E9EE0000DDB0 /* Results+Ext.swift in Sources */,
 				CFBF722A2D43F10600BAECF9 /* HomeUseCase.swift in Sources */,
 				781511C32D3F4D720033CFCC /* ResponseNowPlaying.swift in Sources */,
 				781511AF2D3F49230033CFCC /* Environtmens.swift in Sources */,
@@ -523,14 +540,14 @@
 				CFBF72302D43FA7A00BAECF9 /* FavoriteRouter.swift in Sources */,
 				CF98730B2D4151E20061E79B /* MainView.swift in Sources */,
 				CFBF72442D4483C300BAECF9 /* LocaleDataSource.swift in Sources */,
-				CFBF72452D4483C300BAECF9 /* MovieEntities.xcdatamodeld in Sources */,
-				CFBF72462D4483C300BAECF9 /* PersistenceController.swift in Sources */,
 				CF98730C2D4151E20061E79B /* ProfileScreen.swift in Sources */,
 				781511852D3F451B0033CFCC /* MovieAppApp.swift in Sources */,
 				CFBF722C2D43F1D700BAECF9 /* MovieDetailInteractor.swift in Sources */,
 				CF9873142D4151E90061E79B /* LayoutConstants.swift in Sources */,
 				CFEBEBE72D3FFAFB00CF5638 /* MovieRepository.swift in Sources */,
 				CFBF722E2D43F9D000BAECF9 /* FavoriteInteractor.swift in Sources */,
+				78DA24DD2D62E5310000DDB0 /* MovieEntity.swift in Sources */,
+				78DA24DF2D62E6830000DDB0 /* RealmDataSource.swift in Sources */,
 				CF9873102D4151E60061E79B /* KeyedDecodingContainer+Ext.swift in Sources */,
 				CF9873112D4151E60061E79B /* String+Ext.swift in Sources */,
 				CFBF72262D43F07D00BAECF9 /* HomeRouter.swift in Sources */,
@@ -836,6 +853,22 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		78DA24D52D62DFBA0000DDB0 /* XCRemoteSwiftPackageReference "Core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adjifsyah/Core";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		78DA24E22D62EC140000DDB0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -862,25 +895,17 @@
 			package = 781511A92D3F462B0033CFCC /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
+		78DA24E32D62EC140000DDB0 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78DA24E22D62EC140000DDB0 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		CFEBEBF22D40092300CF5638 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		CFBF72402D4483C300BAECF9 /* MovieEntities.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */,
-			);
-			currentVersion = CFBF72432D4483C300BAECF9 /* MovieEntities.xcdatamodel */;
-			path = MovieEntities.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 781511792D3F451B0033CFCC /* Project object */;
 }

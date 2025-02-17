@@ -8,10 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol HomeUseCase {
-    func fetchMovies() -> Observable<[MovieModel]>
-}
-
 class HomeInteractor: HomeUseCase {
     let repository: MovieRepositoryLmpl
     

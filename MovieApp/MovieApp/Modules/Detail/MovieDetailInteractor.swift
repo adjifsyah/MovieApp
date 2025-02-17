@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 protocol MovieDetailUseCase {
     func getFavorite(id movieID: Int) -> Observable<MovieDetailModel>
@@ -46,7 +47,7 @@ class MovieDetailInteractor: MovieDetailUseCase {
 
 final class Injection: NSObject {
     private func provideRepository() -> MovieRepositoryLmpl {
-        let locale = CoreDataDataSource.sharedInstance
+        let locale = RealmDataSource(realm: try? Realm())
         
         let alamofireClient = AlamofireClients()
         let remote = RemoteDataSource.sharedInstance(.shared, alamofireClient)

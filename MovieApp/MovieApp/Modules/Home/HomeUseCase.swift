@@ -8,10 +8,6 @@
 import Foundation
 import RxSwift
 
-//protocol HomeUseCase {
-//    func fetchListMovies() -> Observable<[MovieModel]>
-//}
-//
-//class HomeInteractor: HomeUseCase {
-//    func
-//}
+protocol HomeUseCase {
+    func fetchMovies() -> Observable<[MovieModel]>
+}

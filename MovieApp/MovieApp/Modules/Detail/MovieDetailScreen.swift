@@ -32,7 +32,6 @@ struct MovieDetailScreen: View {
                                 .frame(width: 80, height: 80)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                             VStack(alignment: .leading, spacing: 2) {
-                                // "viewModel.movieDetail.title
                                 Text(presenter.movieDetail.title)
                                     .font(.system(size: 18, weight: .bold))
                                     .foregroundStyle(.black)
@@ -182,7 +181,6 @@ struct MovieDetailScreen: View {
             .onAppear {
                 adaptiveColumn = [
                     GridItem(.adaptive(minimum: (proxy.size.width / 4) - (16)))
-//                    GridItem(.flexible())
                 ]
             }
         }

@@ -42,10 +42,9 @@ final class MovieMapper {
         )
     }
     
-    static func mapMovieDetailDomainToEntity(movie: MovieDetailModel, context: NSManagedObjectContext) -> MovieEntity {
-        
-        let entity = MovieEntity(context: context)
-        entity.movie_id = Int64(movie.id)
+    static func mapMovieDetailDomainToEntity(movie: MovieDetailModel) -> MoviesEntity {
+        let entity = MoviesEntity()
+        entity.movie_id = String(movie.id)
         entity.title = movie.title
         entity.overview = movie.overview
         entity.release_date = movie.releaseDate
@@ -70,15 +69,15 @@ final class MovieMapper {
         )
     }
     
-    static func mapMovieDetailEntityToDomain(movieEntity: [MovieEntity], context: NSManagedObjectContext) -> [MovieDetailModel] {
+    static func mapMovieDetailEntityToDomain(movieEntity: [MoviesEntity]) -> [MovieDetailModel] {
         return movieEntity.map { movieEntity in
             var domain = MovieDetailModel()
-            domain.id = Int(movieEntity.movie_id)
-            domain.title = movieEntity.title ?? ""
-            domain.overview = movieEntity.overview ?? ""
-            domain.releaseDate = movieEntity.release_date ?? ""
-            domain.posterPath = movieEntity.poster_path ?? ""
-            domain.backdropPath = movieEntity.backdrop_path ?? ""
+            domain.id = Int(movieEntity.movie_id) ?? 0
+            domain.title = movieEntity.title
+            domain.overview = movieEntity.overview
+            domain.releaseDate = movieEntity.release_date
+            domain.posterPath = movieEntity.poster_path
+            domain.backdropPath = movieEntity.backdrop_path
             domain.voteAverage = movieEntity.average
             return domain
         }

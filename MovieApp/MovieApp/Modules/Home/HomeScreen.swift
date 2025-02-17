@@ -32,7 +32,6 @@ struct HomeScreen: View {
                                     presenter.screenSize = size
                                 }
                         } else {
-                            // Fallback on earlier versions
                             Color.clear
                                 .onAppear {
                                     presenter.screenSize = proxy.size
