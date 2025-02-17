@@ -27,6 +27,9 @@ struct MainView: View {
                     Label("Favorite", systemImage: "star")
                 }
                 .tag(2)
+                .toolbar(mainVM.visibility, for: .tabBar)
+                .environmentObject(mainVM)
+            
             
             profile
                 .tabItem {

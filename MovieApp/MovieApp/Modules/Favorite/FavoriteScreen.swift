@@ -10,6 +10,7 @@ import RxSwift
 import Kingfisher
 
 struct FavoriteScreen: View {
+    @EnvironmentObject var master: MainVM
     @StateObject var presenter: FavoritePresenter
     
     var body: some View {
@@ -27,15 +28,16 @@ struct FavoriteScreen: View {
             .background(.white)
             .toolbar(.automatic, for: .tabBar)
             .navigationTitle("Favorite")
+            .onAppear {
+                master.visibility = .visible
+                presenter.fetchFavorite()
+            }
         }
         .overlay(
             Text("Simpan film favorit anda sekarang")
                 .font(.system(size: 14))
                 .opacity(presenter.listFavorite.isEmpty ? 1 : 0)
         )
-        .onAppear {
-            presenter.fetchFavorite()
-        }
     }
     
     func rowView(_ movie: MovieDetailModel) -> some View {

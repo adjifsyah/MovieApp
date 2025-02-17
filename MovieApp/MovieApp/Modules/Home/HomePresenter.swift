@@ -27,9 +27,11 @@ extension HomePresenter {
     func fetchNowPlaying() {
         useCase.fetchMovies()
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
-                self?.movies = result
-            }
+            .subscribe(onNext: { result in
+                self.movies = result
+            }, onError: { error in
+                print(error)
+            })
             .disposed(by: disposeBag)
     }
     
