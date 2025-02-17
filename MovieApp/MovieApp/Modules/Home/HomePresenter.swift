@@ -10,7 +10,7 @@ import RxSwift
 
 class HomePresenter: ObservableObject {
     @Published var movies: [MovieModel] = []
-    
+    @Published var visibilty: Visibility = .visible
     @Published var screenSize: CGSize = .init()
     
     let router: HomeRouter = HomeRouter()

@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct HomeScreen: View {
+    @EnvironmentObject var master: MainVM
     @StateObject var presenter: HomePresenter
     
     var body: some View {
@@ -52,6 +53,7 @@ struct HomeScreen: View {
             .toolbar(.automatic, for: .tabBar)
             .navigationTitle("Movies")
             .onAppear {
+                master.visibility = .visible
                 presenter.fetchNowPlaying()
             }
 

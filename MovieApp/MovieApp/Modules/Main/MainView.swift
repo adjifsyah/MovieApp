@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var homePresenter: HomePresenter
-    @EnvironmentObject var favoritePresenter: FavoritePresenter
+    @StateObject var mainVM: MainVM = MainVM()
+    @State var homePresenter: HomePresenter
+    @State var favoritePresenter: FavoritePresenter
     
     var body: some View {
         TabView {
@@ -18,6 +19,8 @@ struct MainView: View {
                     Label("Home", systemImage: "house")
                 }
                 .tag(1)
+                .toolbar(mainVM.visibility, for: .tabBar)
+                .environmentObject(mainVM)
             
             favorite
                 .tabItem {
@@ -47,6 +50,12 @@ struct MainView: View {
     }
 }
 
+class MainVM: ObservableObject {
+    @Published var visibility: Visibility = .visible
+}
+
 #Preview {
-    MainView()
+    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
+    let favoritePresenter = FavoritePresenter(useCases: Injection().provideFavoriteUseCase())
+    return MainView(homePresenter: homePresenter, favoritePresenter: favoritePresenter)
 }

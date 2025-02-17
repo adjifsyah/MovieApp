@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct MovieDetailScreen: View {
+    @EnvironmentObject var master: MainVM
     @Environment(\.dismiss) var dismiss
     @StateObject var presenter: MovieDetailPresenter
     @State var adaptiveColumn: [GridItem] = []
@@ -115,9 +116,6 @@ struct MovieDetailScreen: View {
                         .background(.white)
                     }
                     .padding(.top, presenter.screenSize.height / 3 - 24)
-                    
-                    
-                    .toolbar(.hidden, for: .tabBar)
                 }
                 .overlay(
                     VStack {
@@ -179,6 +177,7 @@ struct MovieDetailScreen: View {
                 }
             }
             .onAppear {
+                master.visibility = .hidden
                 adaptiveColumn = [
                     GridItem(.adaptive(minimum: (proxy.size.width / 4) - (16)))
                 ]

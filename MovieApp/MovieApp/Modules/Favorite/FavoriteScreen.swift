@@ -34,7 +34,6 @@ struct FavoriteScreen: View {
                 .opacity(presenter.listFavorite.isEmpty ? 1 : 0)
         )
         .onAppear {
-            print("HELLOOO")
             presenter.fetchFavorite()
         }
     }
