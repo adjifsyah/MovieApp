@@ -54,21 +54,7 @@ final class MovieMapper {
         
         return entity
     }
-    
-    
-    static func mapMovieDetailEntityToDomain(movie entity: MovieEntity) -> MovieDetailModel {
-        
-        MovieDetailModel(
-            id: Int(entity.movie_id),
-            title: entity.title ?? "",
-            overview: entity.overview ?? "",
-            backdropPath: entity.backdrop_path ?? "",
-            posterPath: entity.poster_path ?? "",
-            releaseDate: entity.release_date ?? "",
-            voteAverage: entity.average
-        )
-    }
-    
+
     static func mapMovieDetailEntityToDomain(movieEntity: [MoviesEntity]) -> [MovieDetailModel] {
         return movieEntity.map { movieEntity in
             var domain = MovieDetailModel()
