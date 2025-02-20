@@ -6,16 +6,21 @@
 //
 
 import SwiftUI
+import Core
+import Movie
+
+let homeUseCase: Interactor<URLRequest, [MovieDomainModel], MoviesRepositories<GetMoviesDataSource, MovieTransform>> = Injection.init().provideHomeUseCases()
 
 @main
 struct MovieAppApp: App {
-    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
+    let homePresent = GetListPresenter(useCase: homeUseCase)
+//    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
     let favoritePresenter = FavoritePresenter(useCases: Injection().provideFavoriteUseCase())
     
     var body: some Scene {
         WindowGroup {
             MainView(
-                homePresenter: homePresenter,
+                homePresenter: homePresent,
                 favoritePresenter: favoritePresenter
             )
         }

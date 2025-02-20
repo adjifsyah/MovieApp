@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct MovieModel {
-    let id: Int
-    let title: String
-    let overview: String
-    let backdropPath: String
-    let posterPath: String
-    let releaseDate: String
+public struct MovieModel: Equatable, Identifiable {
+    public let id: Int
+    public let title: String
+    public let overview: String
+    public let backdropPath: String
+    public let posterPath: String
+    public let releaseDate: String
     
-    init(
-        id: Int = 0,
-        title: String = "",
-        overview: String = "",
-        backdropPath: String = "",
-        posterPath: String = "",
-        releaseDate: String = ""
+    public init(
+        id: Int,
+        title: String,
+        overview: String,
+        backdropPath: String,
+        posterPath: String,
+        releaseDate: String
     ) {
         self.id = id
         self.title = title
@@ -31,3 +31,17 @@ struct MovieModel {
         self.releaseDate = releaseDate
     }
 }
+
+//public struct CategoryDomainModel: Equatable, Identifiable {
+//    public let id: String
+//       public let title: String
+//       public let image: String
+//       public let description: String
+//    
+//    public init(id: String, title: String, image: String, description: String) {
+//        self.id = id
+//        self.title = title
+//        self.image = image
+//        self.description = description
+//    }
+//}

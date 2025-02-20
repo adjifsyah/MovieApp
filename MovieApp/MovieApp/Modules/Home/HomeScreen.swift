@@ -7,16 +7,18 @@
 
 import SwiftUI
 import Kingfisher
+import Core
+import Movie
 
 struct HomeScreen: View {
     @EnvironmentObject var master: MainVM
-    @StateObject var presenter: HomePresenter
+    @StateObject var presenter: GetListPresenter<URLRequest, MovieDomainModel, Interactor<URLRequest, [MovieDomainModel], MoviesRepositories<GetMoviesDataSource, MovieTransform>>>
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: LayoutConstants.Spacing.medium) {
-                    ForEach(presenter.movies, id: \.id) { movie in
+                    ForEach(presenter.list, id: \.id) { movie in
                         movieRow(movie)
                     }
                 }
@@ -27,25 +29,25 @@ struct HomeScreen: View {
                         if #available(iOS 17.0, *) {
                             Color.clear
                                 .onAppear {
-                                    presenter.screenSize = proxy.size
+                                    master.screenSize = proxy.size
                                 }
                                 .onChange(of: proxy.size) { _, size in
-                                    presenter.screenSize = size
+                                    master.screenSize = size
                                 }
                         } else {
                             Color.clear
                                 .onAppear {
-                                    presenter.screenSize = proxy.size
+                                    master.screenSize = proxy.size
                                 }
                                 .onChange(of: proxy.size) { size in
-                                    presenter.screenSize = size
+                                    master.screenSize = size
                                 }
                         }
                     }
                         .overlay(
                             Text("Saat ini film tidak tersedia.")
                                 .font(.system(size: 14))
-                                .opacity(presenter.movies.isEmpty ? 1 : 0)
+                                .opacity(presenter.list.isEmpty ? 1 : 0)
                         )
                 )
             }
@@ -54,7 +56,7 @@ struct HomeScreen: View {
             .navigationTitle("Movies")
             .onAppear {
                 master.visibility = .visible
-                presenter.fetchNowPlaying()
+                presenter.getList(request: MovieEndpoint.list.urlRequest)
             }
 
         }
@@ -62,8 +64,8 @@ struct HomeScreen: View {
                 
     }
     
-    func movieRow(_ movie: MovieModel) -> some View {
-        presenter.navigateTo(movie: movie) {
+    func movieRow(_ movie: MovieDomainModel) -> some View {
+//        presenter.navigateTo(movie: movie) {
             ZStack(alignment: .bottomLeading) {
                 KFImage(movie.backdropPath.toImageURL)
                     .resizable()
@@ -83,18 +85,18 @@ struct HomeScreen: View {
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 10)
-                .frame(width: presenter.screenSize.width - (LayoutConstants.sidePadding * 2))
+                .frame(width: master.screenSize.width - (LayoutConstants.sidePadding * 2))
                 
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
-        }
+//        }
     }
 }
 
-#Preview {
-    HomeScreen(
-        presenter: HomePresenter(
-            useCase: Injection().provideHomeUseCase()
-        )
-    )
-}
+//#Preview {
+//    HomeScreen(
+//        presenter: HomePresenter(
+//            useCase: Injection().provideHomeUseCase()
+//        )
+//    )
+//}

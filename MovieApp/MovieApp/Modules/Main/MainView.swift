@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Core
+import RxSwift
+import Movie
+
+
 
 struct MainView: View {
     @StateObject var mainVM: MainVM = MainVM()
-    @State var homePresenter: HomePresenter
+    @State var homePresenter: GetListPresenter<URLRequest, MovieDomainModel, Interactor<URLRequest, [MovieDomainModel], MoviesRepositories<GetMoviesDataSource, MovieTransform>>>
     @State var favoritePresenter: FavoritePresenter
     
     var body: some View {
         TabView {
-            home
+            HomeScreen(presenter: homePresenter)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -22,7 +27,7 @@ struct MainView: View {
                 .toolbar(mainVM.visibility, for: .tabBar)
                 .environmentObject(mainVM)
             
-            favorite
+            FavoriteScreen(presenter: favoritePresenter)
                 .tabItem {
                     Label("Favorite", systemImage: "star")
                 }
@@ -30,8 +35,7 @@ struct MainView: View {
                 .toolbar(mainVM.visibility, for: .tabBar)
                 .environmentObject(mainVM)
             
-            
-            profile
+            ProfileScreen()
                 .tabItem {
                     Label("About", systemImage: "person")
                 }
@@ -39,26 +43,15 @@ struct MainView: View {
         }
         .preferredColorScheme(.light)
     }
-    
-    var home: some View {
-        HomeScreen(presenter: homePresenter)
-    }
-    
-    var favorite: some View {
-        FavoriteScreen(presenter: favoritePresenter)
-    }
-    
-    var profile: some View {
-        ProfileScreen()
-    }
 }
 
 class MainVM: ObservableObject {
     @Published var visibility: Visibility = .visible
+    @Published var screenSize: CGSize = .init()
 }
 
-#Preview {
-    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
-    let favoritePresenter = FavoritePresenter(useCases: Injection().provideFavoriteUseCase())
-    return MainView(homePresenter: homePresenter, favoritePresenter: favoritePresenter)
-}
+//#Preview {
+//    let homePresenter = HomePresenter(useCase: Injection().provideHomeUseCase())
+//    let favoritePresenter = FavoritePresenter(useCases: Injection().provideFavoriteUseCase())
+//    return MainView(homePresenter: homePresenter, favoritePresenter: favoritePresenter)
+//}

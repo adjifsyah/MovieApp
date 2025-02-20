@@ -13,10 +13,10 @@ protocol HttpClient {
     func load(url: URL, method: String, params: [String: String]?) -> Observable<Data>
 }
 
-class AlamofireClients: HttpClient {
+public class AlamofireClients: HttpClient {
     var session: Session?
     
-    init(URLSessionConfig configuration: URLSessionConfiguration = URLSessionConfiguration.default, timeoutInterval: TimeInterval = 120) {
+    public init(URLSessionConfig configuration: URLSessionConfiguration = URLSessionConfiguration.default, timeoutInterval: TimeInterval = 120) {
             configuration.timeoutIntervalForRequest = timeoutInterval
             configuration.timeoutIntervalForResource = timeoutInterval
             self.session = Session(configuration: configuration)

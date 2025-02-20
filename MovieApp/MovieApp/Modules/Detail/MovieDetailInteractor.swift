@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 import RealmSwift
+import Core
+import Movie
 
 protocol MovieDetailUseCase {
     func getFavorite(id movieID: Int) -> Observable<MovieDetailModel>
@@ -71,6 +73,12 @@ final class Injection: NSObject {
             repository: provideRepository()
         )
     }
-    
-    
+  
+    func provideHomeUseCases<U: UseCases>() -> U where U.Request == URLRequest, U.Response == [MovieDomainModel] {
+        let client = AlamofireClient()
+        let remote = GetMoviesDataSource(client: client)
+        let mapper = MovieTransform()
+        let repository = MoviesRepositories(remote: remote, mapper: mapper)
+        return Interactor(repository: repository) as! U
+    }
 }

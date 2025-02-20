@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import CoreData
 
 protocol MovieRepositoryLmpl {
     func fetchMovies() -> Observable<[MovieModel]>
