@@ -10,6 +10,7 @@ import Core
 import Movie
 
 let homeUseCase: Interactor<URLRequest, [MovieDomainModel], MoviesRepositories<GetMoviesDataSource, MovieTransform>> = Injection.init().provideHomeUseCases()
+let detailUseCase: Interactor<Int, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>> = Injection.init().provideDetailUseCases()
 
 @main
 struct MovieAppApp: App {

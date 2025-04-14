@@ -8,7 +8,7 @@
 import SwiftUI
 import RxSwift
 
-class MovieDetailPresenter: ObservableObject {
+public class MovieDetailPresenter: ObservableObject {
     @Published var movieDetail: MovieDetailModel = .init()
     private let useCase: MovieDetailUseCase
     private let disposeBag = DisposeBag()

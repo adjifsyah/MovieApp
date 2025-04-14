@@ -12,14 +12,29 @@ import Movie
 
 struct HomeScreen: View {
     @EnvironmentObject var master: MainVM
-    @StateObject var presenter: GetListPresenter<URLRequest, MovieDomainModel, Interactor<URLRequest, [MovieDomainModel], MoviesRepositories<GetMoviesDataSource, MovieTransform>>>
+    @StateObject var presenter: GetListPresenter<
+        URLRequest,
+        MovieDomainModel,
+        Interactor<
+            URLRequest,
+            [MovieDomainModel],
+            MoviesRepositories<
+                GetMoviesDataSource,
+                MovieTransform
+            >
+        >
+    >
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: LayoutConstants.Spacing.medium) {
                     ForEach(presenter.list, id: \.id) { movie in
-                        movieRow(movie)
+                        NavigationLink {
+                            HomeRouter().makeDetailView(id: movie.id)
+                        } label: {
+                            movieRow(movie)
+                        }
                     }
                 }
                 .padding(.vertical, LayoutConstants.verticalPadding)

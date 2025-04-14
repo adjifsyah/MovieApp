@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import Core
+import Movie
 
 class HomeRouter {
     func makeDetailView(id movieID: Int, isFromFavorite: Bool = false, onDelete: (() -> Void)? = nil) -> some View {
-        let useCase = Injection().provideDetailsUseCase()
-        let presenter = MovieDetailPresenter(movieID: movieID, useCase: useCase)
+        let useCase: Interactor<Int, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>  = Injection().provideDetailUseCases()
+//        let presenter = MovieDetailPresenter(movieID: movieID, useCase: useCase)
+        let presenter: GetDetailMoviePresenter<Interactor<Int, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>> = .init(id: movieID, movieUseCase: useCase)
         return MovieDetailScreen(presenter: presenter)
             .navigationBarBackButtonHidden()
     }

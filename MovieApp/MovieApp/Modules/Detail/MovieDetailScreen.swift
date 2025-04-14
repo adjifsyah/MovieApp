@@ -7,17 +7,19 @@
 
 import SwiftUI
 import Kingfisher
+import Movie
+import Core
 
 struct MovieDetailScreen: View {
     @EnvironmentObject var master: MainVM
     @Environment(\.dismiss) var dismiss
-    @StateObject var presenter: MovieDetailPresenter
+    @StateObject var presenter: GetDetailMoviePresenter<Interactor<Int, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>>
     @State var adaptiveColumn: [GridItem] = []
     
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .topLeading) {
-                KFImage(presenter.movieDetail.backdropPath.toImageURL)
+                KFImage(presenter.movie.backdropPath.toImageURL)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height * 0.5)
@@ -27,44 +29,44 @@ struct MovieDetailScreen: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         HStack(alignment: .top) {
-                            KFImage(presenter.movieDetail.posterPath.toImageURL)
+                            KFImage(presenter.movie.posterPath.toImageURL)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(presenter.movieDetail.title)
+                                Text(presenter.movie.title)
                                     .font(.system(size: 18, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                Text(presenter.movieDetail.genres.map({ $0.name }).joined(separator: ", ") )
+                                Text(presenter.movie.genres.map({ $0.name }).joined(separator: ", ") )
                                     .font(.system(size: 12))
                                     .foregroundStyle(.gray)
                                 
-                                Text(presenter.formatTime(minutes: presenter.movieDetail.runtime))
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(.gray)
+//                                Text(presenter.formatTime(minutes: presenter.movie.runtime))
+//                                    .font(.system(size: 12, weight: .medium))
+//                                    .foregroundStyle(.gray)
                                 Spacer()
-                                presenter.rateView { rate in
-                                    HStack(spacing: 8) {
-                                        HStack(spacing: 2) {
-                                            ForEach(0..<5, id: \.self) { index in
-                                                let separator = Int(rate.components(separatedBy: ".").last ?? "0") ?? 0
-                                                let double = Double(rate) ?? 0
-                                                let separate = Int(double.rounded(.down)) == index && separator >= 1
-                                                Image(systemName: index < Int(double.rounded(.down)) ? "star.fill" : separate ? "star.leadinghalf.filled" : "star")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 12)
-                                                    .foregroundStyle(.orange)
-                                            }
-                                        }
-                                        Text(rate)
-                                            .font(.system(size: 12, weight: .bold))
-                                            .padding(.top, 1)
-                                            .foregroundStyle(.orange)
-                                    }
-                                }
+//                                presenter.rateView { rate in
+//                                    HStack(spacing: 8) {
+//                                        HStack(spacing: 2) {
+//                                            ForEach(0..<5, id: \.self) { index in
+//                                                let separator = Int(rate.components(separatedBy: ".").last ?? "0") ?? 0
+//                                                let double = Double(rate) ?? 0
+//                                                let separate = Int(double.rounded(.down)) == index && separator >= 1
+//                                                Image(systemName: index < Int(double.rounded(.down)) ? "star.fill" : separate ? "star.leadinghalf.filled" : "star")
+//                                                    .resizable()
+//                                                    .scaledToFit()
+//                                                    .frame(width: 12)
+//                                                    .foregroundStyle(.orange)
+//                                            }
+//                                        }
+//                                        Text(rate)
+//                                            .font(.system(size: 12, weight: .bold))
+//                                            .padding(.top, 1)
+//                                            .foregroundStyle(.orange)
+//                                    }
+//                                }
                                 .padding(.bottom, 4)
                             }
                             
@@ -103,9 +105,9 @@ struct MovieDetailScreen: View {
                                     .font(.system(size: 14, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                presenter.overview { text in
-                                    Text(text)
-                                }
+//                                presenter.overview { text in
+//                                    Text(text)
+//                                }
                             }
                             .padding(.horizontal, LayoutConstants.sidePadding)
                             
@@ -115,7 +117,7 @@ struct MovieDetailScreen: View {
                         }
                         .background(.white)
                     }
-                    .padding(.top, presenter.screenSize.height / 3 - 24)
+//                    .padding(.top, presenter.screenSize.height / 3 - 24)
                 }
                 .overlay(
                     VStack {
@@ -137,7 +139,7 @@ struct MovieDetailScreen: View {
                             Spacer()
                             
                             Button {
-                                presenter.onTapFavoriteBTN()
+//                                presenter.onTapFavoriteBTN()
                             } label: {
                                 Image(systemName: "heart.fill")
                                     .resizable()
@@ -161,21 +163,21 @@ struct MovieDetailScreen: View {
             .overlay(
                 ActivityIndicator(isAnimating: $presenter.isLoading, style: .large)
             )
-            .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
-                Button("Oke", role: .cancel) {
-                    if presenter.isFromFavorite {
-                        presenter.onDelete?()
-                        dismiss()
-                    }
-                }
-            }
-            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $presenter.isAlertConfirmation) {
-                Button("Batal", role: .cancel) { }
-                
-                Button("Yakin", role: .destructive) {
-                    presenter.deleteFavorite()
-                }
-            }
+//            .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
+//                Button("Oke", role: .cancel) {
+//                    if presenter.isFromFavorite {
+//                        presenter.onDelete?()
+//                        dismiss()
+//                    }
+//                }
+//            }
+//            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $presenter.isAlertConfirmation) {
+//                Button("Batal", role: .cancel) { }
+//                
+//                Button("Yakin", role: .destructive) {
+//                    presenter.deleteFavorite()
+//                }
+//            }
             .onAppear {
                 master.visibility = .hidden
                 adaptiveColumn = [
@@ -195,7 +197,7 @@ struct MovieDetailScreen: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .bottom, spacing: 24) {
-                    ForEach(presenter.movieDetail.productionCompanies, id: \.id) { production in
+                    ForEach(presenter.movie.productionCompanies, id: \.id) { production in
                         VStack(spacing: 4) {
                             if production.logoPath != "" {
                                 KFImage(production.logoPath.toImageURL)
@@ -220,11 +222,11 @@ struct MovieDetailScreen: View {
     }
 }
 
-#Preview {
-    MovieDetailScreen(
-        presenter: MovieDetailPresenter(
-            movieID: 939243,
-            useCase: Injection().provideDetailsUseCase()
-        )
-    )
-}
+//#Preview {
+//    MovieDetailScreen(
+//        presenter: MovieDetailPresenter(
+//            movieID: 939243,
+//            useCase: Injection().provideDetailsUseCase()
+//        )
+//    )
+//}

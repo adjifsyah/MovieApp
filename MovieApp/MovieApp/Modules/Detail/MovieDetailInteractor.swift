@@ -51,7 +51,7 @@ final class Injection: NSObject {
     private func provideRepository() -> MovieRepositoryLmpl {
         let locale = RealmDataSource(realm: try? Realm())
         
-        let alamofireClient = AlamofireClients()
+        let alamofireClient = AlamofireClient()
         let remote = RemoteDataSource.sharedInstance(.shared, alamofireClient)
         
         return MovieRepository.sharedInstance(
@@ -79,6 +79,17 @@ final class Injection: NSObject {
         let remote = GetMoviesDataSource(client: client)
         let mapper = MovieTransform()
         let repository = MoviesRepositories(remote: remote, mapper: mapper)
+        return Interactor(repository: repository) as! U
+    }
+    
+    func provideDetailUseCases<U: UseCases>() -> U where U.Request == Int, U.Response == DetailMovieModel {
+        let client = AlamofireClient()
+        let remoteDS = RemoteDataSource.sharedInstance(.shared, client)
+        let realm = try! Realm()
+        let remote = GetDetailMoviesDataSource(remote: remoteDS)
+        let locale = GetFavoriteMoviesLocaleDataSource(realm: realm)
+        let mapper = DetailMovieTransform()
+        let repository = GetMovieDetailRepository(remote: remote, locale: locale, mapper: mapper)
         return Interactor(repository: repository) as! U
     }
 }
