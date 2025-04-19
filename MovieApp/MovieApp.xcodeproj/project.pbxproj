@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		785681AD2D66BC6A00B3CFA4 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 785681AC2D66BC6A00B3CFA4 /* Movie */; };
 		78900A682DACE0EB00E1712E /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 78900A672DACE0EB00E1712E /* Core */; };
 		78B1D6A62DB35BBD00E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6A52DB35BBD00E9D662 /* Movie */; };
+		78B1D6D02DB3DBE400E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6CF2DB3DBE400E9D662 /* Movie */; };
 		78DA24E12D62E9EE0000DDB0 /* Results+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA24E02D62E9EE0000DDB0 /* Results+Ext.swift */; };
 		CF9873062D4151E20061E79B /* MovieDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872F92D4151E20061E79B /* MovieDetailScreen.swift */; };
 		CF9873082D4151E20061E79B /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872FC2D4151E20061E79B /* FavoriteScreen.swift */; };
@@ -100,6 +101,7 @@
 				78900A682DACE0EB00E1712E /* Core in Frameworks */,
 				781511A12D3F45E30033CFCC /* RxCocoa in Frameworks */,
 				785681AA2D65940C00B3CFA4 /* Core in Frameworks */,
+				78B1D6D02DB3DBE400E9D662 /* Movie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +368,7 @@
 				785681AC2D66BC6A00B3CFA4 /* Movie */,
 				78900A672DACE0EB00E1712E /* Core */,
 				78B1D6A52DB35BBD00E9D662 /* Movie */,
+				78B1D6CF2DB3DBE400E9D662 /* Movie */,
 			);
 			productName = MovieApp;
 			productReference = 781511812D3F451B0033CFCC /* MovieApp.app */;
@@ -423,7 +426,7 @@
 				CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				785681A52D65934300B3CFA4 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				78900A662DACE0EB00E1712E /* XCRemoteSwiftPackageReference "Core" */,
-				78B1D6A42DB35BBC00E9D662 /* XCLocalSwiftPackageReference "../../Movie" */,
+				78B1D6CE2DB3DBE400E9D662 /* XCRemoteSwiftPackageReference "Movie" */,
 			);
 			productRefGroup = 781511822D3F451B0033CFCC /* Products */;
 			projectDirPath = "";
@@ -759,13 +762,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		78B1D6A42DB35BBC00E9D662 /* XCLocalSwiftPackageReference "../../Movie" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../Movie;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		7815119F2D3F45E30033CFCC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -797,6 +793,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.21;
+			};
+		};
+		78B1D6CE2DB3DBE400E9D662 /* XCRemoteSwiftPackageReference "Movie" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adjifsyah/Movie.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
 			};
 		};
 		CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -845,6 +849,11 @@
 		};
 		78B1D6A52DB35BBD00E9D662 /* Movie */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Movie;
+		};
+		78B1D6CF2DB3DBE400E9D662 /* Movie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78B1D6CE2DB3DBE400E9D662 /* XCRemoteSwiftPackageReference "Movie" */;
 			productName = Movie;
 		};
 		CFEBEBF22D40092300CF5638 /* Kingfisher */ = {
