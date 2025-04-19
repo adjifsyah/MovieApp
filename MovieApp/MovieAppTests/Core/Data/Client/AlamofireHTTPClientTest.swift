@@ -8,16 +8,18 @@
 import XCTest
 import RxSwift
 import Alamofire
+import Movie
+import Core
 @testable import MovieApp
 
 class AlamofireHTTPClientTest: XCTestCase {
-    var client: AlamofireClients!
+    var client: AlamofireClient!
     var url: URL!
     var disposeBag: DisposeBag!
     
     override func setUp() {
         super.setUp()
-        client = AlamofireClients()
+        client = AlamofireClient()
         url = URL(string: "https://example.com")
         disposeBag = DisposeBag()
     }
@@ -33,14 +35,15 @@ class AlamofireHTTPClientTest: XCTestCase {
     func testAlamofire_whenGivenData_shouldReturnTrue() {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [MockURLProtocol.self]
-        client = AlamofireClients(URLSessionConfig: config)
+        client = AlamofireClient(URLSessionConfig: config)
         
         let mockResponseData = "{\"status\": \"ok\"}"
         MockURLProtocol.stubResponseData = mockResponseData.data(using: .utf8)
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
-        client.load(url: url, method: "GET", params: nil)
+//        load(url: url, method: "GET", params: nil)
+        client.load(request: try! URLRequest(url: url, method: .get))
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { data in
@@ -59,13 +62,13 @@ class AlamofireHTTPClientTest: XCTestCase {
     func testAlamofire_whenGivenNoData_shouldReturnError() {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [MockURLProtocol.self]
-        client = AlamofireClients(URLSessionConfig: config)
+        client = AlamofireClient(URLSessionConfig: config)
         
         MockURLProtocol.stubError = NSError(domain: "MockError", code: 1001)
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
-        client.load(url: url, method: "GET", params: nil)
+        client.load(request: try! URLRequest(url: url, method: .get))
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onError: { error in

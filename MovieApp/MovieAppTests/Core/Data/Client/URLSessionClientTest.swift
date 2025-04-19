@@ -43,7 +43,7 @@ class URLSessionClientTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
-        client.load(url: url, method: "GET", params: nil)
+        client.load(request: try! URLRequest(url: url, method: .get))
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { data in
@@ -73,7 +73,7 @@ class URLSessionClientTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Observer should receive data")
         
-        client.load(url: url, method: "GET", params: nil)
+        client.load(request: try! URLRequest(url: url, method: .get))
             .observe(on: MainScheduler.instance)
             .subscribe(
                 onError: { error in

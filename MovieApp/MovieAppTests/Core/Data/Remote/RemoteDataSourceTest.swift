@@ -7,18 +7,20 @@
 
 import XCTest
 import RxSwift
+import Core
+import Movie
 @testable import MovieApp
 
 final class RemoteDataSourceTest: XCTestCase {
     var remoteDataSource: RemoteDataSourceLmpl!
-    var httpClient: AlamofireClients!
+    var httpClient: HttpClient!
     var mockClient: MockHttpClient!
     var disposeBag: DisposeBag!
 
     override func setUp() {
         super.setUp()
         mockClient = MockHttpClient()
-        httpClient = AlamofireClients()
+        httpClient = AlamofireClient()
         let networkConfig = NetworkConfiguration.shared
         remoteDataSource = RemoteDataSource.sharedInstance(networkConfig, mockClient)
         disposeBag = DisposeBag()
@@ -33,13 +35,13 @@ final class RemoteDataSourceTest: XCTestCase {
 
     func testLoad_whenValidResponse_shouldReturnDecodedObject() {
         // Given
-        let expectedModel = ResponseNowPlaying(page: 1, results: [ResponseMovie(id: 4)], totalPages: 10, totalResults: 10)
+        let expectedModel = NowPlayingMoviesResponse(page: 1, results: [MovieResponse(id: 4)], totalPages: 10, totalResults: 10)
         let jsonData = try! JSONEncoder().encode(expectedModel)
         mockClient.data = jsonData
 
         remoteDataSource.load(endpoint: "/nowPlaying", method: "GET", params: nil)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (decodedObject: ResponseNowPlaying) in
+            .subscribe(onNext: { (decodedObject: NowPlayingMoviesResponse) in
                 
                 XCTAssertEqual(decodedObject.page, expectedModel.page)
                 XCTAssertEqual(decodedObject.results.first?.id, expectedModel.results.first?.id)
@@ -67,7 +69,7 @@ final class RemoteDataSourceTest: XCTestCase {
         // When
         remoteDataSource.load(endpoint: "/nowPlaying", method: "GET", params: nil)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (decodedObject: ResponseNowPlaying) in
+            .subscribe(onNext: { (decodedObject: NowPlayingMoviesResponse) in
                 XCTFail("Expected error, but got success")
             }, onError: { error in
                 // Then
@@ -85,7 +87,7 @@ final class RemoteDataSourceTest: XCTestCase {
         // When
         remoteDataSource.load(endpoint: "/nowPlaying", method: "GET", params: nil)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (decodedObject: ResponseNowPlaying) in
+            .subscribe(onNext: { (decodedObject: NowPlayingMoviesResponse) in
                 XCTFail("Expected error, but got success")
             }, onError: { error in
                 // Then
@@ -100,7 +102,7 @@ final class RemoteDataSourceTest: XCTestCase {
         
         remoteDataSource.load(endpoint: invalidEndpoint, method: "GET", params: nil)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (_: ResponseNowPlaying) in }, onError: { error in
+            .subscribe(onNext: { (_: NowPlayingMoviesResponse) in }, onError: { error in
                 XCTAssertEqual((error as NSError).code, 404)
                 XCTAssertEqual((error as NSError).domain, "api.themoviedb.orginvalidEndpoint//")
             })
@@ -110,10 +112,11 @@ final class RemoteDataSourceTest: XCTestCase {
 
 extension RemoteDataSourceTest {
     class MockHttpClient: HttpClient {
+        
         var data: Data?
         var error: Error?
         
-        func load(url: URL, method: String, params: [String: String]?) -> Observable<Data> {
+        func load(request: URLRequest) -> RxSwift.Observable<Data> {
             if let error = error {
                 return Observable.error(error)
             }
