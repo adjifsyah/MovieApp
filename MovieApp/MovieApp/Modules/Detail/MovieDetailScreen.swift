@@ -7,16 +7,24 @@
 
 import SwiftUI
 import Kingfisher
+import Movie
+import Core
 
 struct MovieDetailScreen: View {
+    @EnvironmentObject var master: MainVM
     @Environment(\.dismiss) var dismiss
-    @StateObject var presenter: MovieDetailPresenter
+    @StateObject var presenter: GetDetailMoviePresenter<
+        Interactor<DetailMovieModel, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>,
+        Interactor<DetailMovieModel, DetailMovieModel, GetFavoriteMovieRepository<GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>
+    >
     @State var adaptiveColumn: [GridItem] = []
+    
+    @State var screenSize: CGSize = .zero
     
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .topLeading) {
-                KFImage(presenter.movieDetail.backdropPath.toImageURL)
+                KFImage(presenter.movie.backdropPath.toImageURL)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height * 0.5)
@@ -26,25 +34,26 @@ struct MovieDetailScreen: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         HStack(alignment: .top) {
-                            KFImage(presenter.movieDetail.posterPath.toImageURL)
+                            KFImage(presenter.movie.posterPath.toImageURL)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                             VStack(alignment: .leading, spacing: 2) {
-                                // "viewModel.movieDetail.title
-                                Text(presenter.movieDetail.title)
+                                Text(presenter.movie.title)
                                     .font(.system(size: 18, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                Text(presenter.movieDetail.genres.map({ $0.name }).joined(separator: ", ") )
+                                Text(presenter.movie.genres.map({ $0.name }).joined(separator: ", ") )
                                     .font(.system(size: 12))
                                     .foregroundStyle(.gray)
                                 
-                                Text(presenter.formatTime(minutes: presenter.movieDetail.runtime))
+                                Text(presenter.formatTime(minutes: presenter.movie.runtime))
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundStyle(.gray)
+                                
                                 Spacer()
+                                
                                 presenter.rateView { rate in
                                     HStack(spacing: 8) {
                                         HStack(spacing: 2) {
@@ -103,8 +112,10 @@ struct MovieDetailScreen: View {
                                     .font(.system(size: 14, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-                                presenter.overview { text in
-                                    Text(text)
+                                HStack(spacing: 4) {
+                                    Text(presenter.movie.overview)
+                                        .font(.system(size: 14))
+                                        .foregroundStyle(.gray)
                                 }
                             }
                             .padding(.horizontal, LayoutConstants.sidePadding)
@@ -115,10 +126,7 @@ struct MovieDetailScreen: View {
                         }
                         .background(.white)
                     }
-                    .padding(.top, presenter.screenSize.height / 3 - 24)
-                    
-                    
-                    .toolbar(.hidden, for: .tabBar)
+//                    .padding(.top, presenter.screenSize.height / 3 - 24)
                 }
                 .overlay(
                     VStack {
@@ -146,7 +154,7 @@ struct MovieDetailScreen: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 16)
-                                    .foregroundStyle(presenter.isFavorite ? .red : .black)
+                                    .foregroundStyle(presenter.movie.isFavorite ? .red : .black)
                                     .padding(10)
                                     .background(.white)
                                     .clipShape(Circle())
@@ -166,8 +174,7 @@ struct MovieDetailScreen: View {
             )
             .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
                 Button("Oke", role: .cancel) {
-                    if presenter.isFromFavorite {
-                        presenter.onDelete?()
+                    if presenter.movie.isFavorite == false {
                         dismiss()
                     }
                 }
@@ -176,13 +183,13 @@ struct MovieDetailScreen: View {
                 Button("Batal", role: .cancel) { }
                 
                 Button("Yakin", role: .destructive) {
-                    presenter.deleteFavorite()
+                    presenter.executeFavorite(id: presenter.movie)
                 }
             }
             .onAppear {
+                master.visibility = .hidden
                 adaptiveColumn = [
                     GridItem(.adaptive(minimum: (proxy.size.width / 4) - (16)))
-//                    GridItem(.flexible())
                 ]
             }
         }
@@ -198,7 +205,7 @@ struct MovieDetailScreen: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .bottom, spacing: 24) {
-                    ForEach(presenter.movieDetail.productionCompanies, id: \.id) { production in
+                    ForEach(presenter.movie.productionCompanies, id: \.id) { production in
                         VStack(spacing: 4) {
                             if production.logoPath != "" {
                                 KFImage(production.logoPath.toImageURL)
@@ -223,11 +230,11 @@ struct MovieDetailScreen: View {
     }
 }
 
-#Preview {
-    MovieDetailScreen(
-        presenter: MovieDetailPresenter(
-            movieID: 939243,
-            useCase: Injection().provideDetailsUseCase()
-        )
-    )
-}
+//#Preview {
+//    MovieDetailScreen(
+//        presenter: MovieDetailPresenter(
+//            movieID: 939243,
+//            useCase: Injection().provideDetailsUseCase()
+//        )
+//    )
+//}

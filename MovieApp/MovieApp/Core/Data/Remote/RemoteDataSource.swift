@@ -7,10 +7,11 @@
 
 import RxSwift
 import SwiftUI
+import Core
 
-protocol RemoteDataSourceLmpl {
-    func load<D: Decodable>(endpoint: String, method: String, params: [String: String]?) -> Observable<D>
-}
+//protocol RemoteDataSourceLmpl {
+//    func load<D: Decodable>(endpoint: String, method: String, params: [String: String]?) -> Observable<D>
+//}
 
 class RemoteDataSource: RemoteDataSourceLmpl {
     private let configuration: NetworkConfiguration
@@ -30,7 +31,10 @@ class RemoteDataSource: RemoteDataSourceLmpl {
             return Observable.error(NSError(domain: configuration.host + endpoint, code: 404))
         }
         
-        return client.load(url: url, method: method, params: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        return client.load(request: request)
             .map { data in
                 do {
                     let decodedObject = try JSONDecoder().decode(D.self, from: data)

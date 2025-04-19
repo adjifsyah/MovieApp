@@ -21,5 +21,4 @@ enum Environments {
     static let apiKey: String = {
         Environments.infoDictionary[Keys.Plist.apiKeyMovieDB] as? String ?? ""
     }()
-    
 }
