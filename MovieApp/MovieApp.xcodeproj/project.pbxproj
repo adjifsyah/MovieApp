@@ -30,7 +30,8 @@
 		78B1D6E62DB3E58E00E9D662 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6E52DB3E58E00E9D662 /* Core */; };
 		78B1D6E92DB3E5A100E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6E82DB3E5A100E9D662 /* Movie */; };
 		78B1D6EC2DB3E7A300E9D662 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6EB2DB3E7A300E9D662 /* Core */; };
-		78B1D6EF2DB3E7B500E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6EE2DB3E7B500E9D662 /* Movie */; };
+		78B1D6F22DB3E8B200E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6F12DB3E8B200E9D662 /* Movie */; };
+		78B1D6F52DB3E9EF00E9D662 /* Movie in Frameworks */ = {isa = PBXBuildFile; productRef = 78B1D6F42DB3E9EF00E9D662 /* Movie */; };
 		CF316E262D5A686F00F89A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF316E252D5A686F00F89A7A /* Assets.xcassets */; };
 		CF9873062D4151E20061E79B /* MovieDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872F92D4151E20061E79B /* MovieDetailScreen.swift */; };
 		CF9873082D4151E20061E79B /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9872FC2D4151E20061E79B /* FavoriteScreen.swift */; };
@@ -103,7 +104,8 @@
 				78B1D6D82DB3DFA400E9D662 /* Core in Frameworks */,
 				78B1D6D72DB3DFA400E9D662 /* RealmSwift in Frameworks */,
 				CFEBEBF32D40092300CF5638 /* Kingfisher in Frameworks */,
-				78B1D6EF2DB3E7B500E9D662 /* Movie in Frameworks */,
+				78B1D6F52DB3E9EF00E9D662 /* Movie in Frameworks */,
+				78B1D6F22DB3E8B200E9D662 /* Movie in Frameworks */,
 				781511AB2D3F462B0033CFCC /* Alamofire in Frameworks */,
 				78B1D6E92DB3E5A100E9D662 /* Movie in Frameworks */,
 				781511A32D3F45E30033CFCC /* RxSwift in Frameworks */,
@@ -377,7 +379,8 @@
 				78B1D6E52DB3E58E00E9D662 /* Core */,
 				78B1D6E82DB3E5A100E9D662 /* Movie */,
 				78B1D6EB2DB3E7A300E9D662 /* Core */,
-				78B1D6EE2DB3E7B500E9D662 /* Movie */,
+				78B1D6F12DB3E8B200E9D662 /* Movie */,
+				78B1D6F42DB3E9EF00E9D662 /* Movie */,
 			);
 			productName = MovieApp;
 			productReference = 781511812D3F451B0033CFCC /* MovieApp.app */;
@@ -435,7 +438,7 @@
 				CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				785681A52D65934300B3CFA4 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				78B1D6EA2DB3E7A300E9D662 /* XCRemoteSwiftPackageReference "Core" */,
-				78B1D6ED2DB3E7B500E9D662 /* XCRemoteSwiftPackageReference "Movie" */,
+				78B1D6F32DB3E9EF00E9D662 /* XCRemoteSwiftPackageReference "Movie" */,
 			);
 			productRefGroup = 781511822D3F451B0033CFCC /* Products */;
 			projectDirPath = "";
@@ -803,12 +806,12 @@
 				minimumVersion = 1.0.4;
 			};
 		};
-		78B1D6ED2DB3E7B500E9D662 /* XCRemoteSwiftPackageReference "Movie" */ = {
+		78B1D6F32DB3E9EF00E9D662 /* XCRemoteSwiftPackageReference "Movie" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adjifsyah/Movie";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
+				minimumVersion = 1.0.6;
 			};
 		};
 		CFEBEBF12D40092300CF5638 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -875,9 +878,13 @@
 			package = 78B1D6EA2DB3E7A300E9D662 /* XCRemoteSwiftPackageReference "Core" */;
 			productName = Core;
 		};
-		78B1D6EE2DB3E7B500E9D662 /* Movie */ = {
+		78B1D6F12DB3E8B200E9D662 /* Movie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 78B1D6ED2DB3E7B500E9D662 /* XCRemoteSwiftPackageReference "Movie" */;
+			productName = Movie;
+		};
+		78B1D6F42DB3E9EF00E9D662 /* Movie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78B1D6F32DB3E9EF00E9D662 /* XCRemoteSwiftPackageReference "Movie" */;
 			productName = Movie;
 		};
 		CFEBEBF22D40092300CF5638 /* Kingfisher */ = {
