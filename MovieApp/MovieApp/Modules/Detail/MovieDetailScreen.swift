@@ -13,8 +13,13 @@ import Core
 struct MovieDetailScreen: View {
     @EnvironmentObject var master: MainVM
     @Environment(\.dismiss) var dismiss
-    @StateObject var presenter: GetDetailMoviePresenter<Interactor<Int, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>>
+    @StateObject var presenter: GetDetailMoviePresenter<
+        Interactor<DetailMovieModel, DetailMovieModel, GetMovieDetailRepository<GetDetailMoviesDataSource, GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>,
+        Interactor<DetailMovieModel, DetailMovieModel, GetFavoriteMovieRepository<GetFavoriteMoviesLocaleDataSource, DetailMovieTransform>>
+    >
     @State var adaptiveColumn: [GridItem] = []
+    
+    @State var screenSize: CGSize = .zero
     
     var body: some View {
         GeometryReader { proxy in
@@ -43,30 +48,32 @@ struct MovieDetailScreen: View {
                                     .font(.system(size: 12))
                                     .foregroundStyle(.gray)
                                 
-//                                Text(presenter.formatTime(minutes: presenter.movie.runtime))
-//                                    .font(.system(size: 12, weight: .medium))
-//                                    .foregroundStyle(.gray)
+                                Text(presenter.formatTime(minutes: presenter.movie.runtime))
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundStyle(.gray)
+                                
                                 Spacer()
-//                                presenter.rateView { rate in
-//                                    HStack(spacing: 8) {
-//                                        HStack(spacing: 2) {
-//                                            ForEach(0..<5, id: \.self) { index in
-//                                                let separator = Int(rate.components(separatedBy: ".").last ?? "0") ?? 0
-//                                                let double = Double(rate) ?? 0
-//                                                let separate = Int(double.rounded(.down)) == index && separator >= 1
-//                                                Image(systemName: index < Int(double.rounded(.down)) ? "star.fill" : separate ? "star.leadinghalf.filled" : "star")
-//                                                    .resizable()
-//                                                    .scaledToFit()
-//                                                    .frame(width: 12)
-//                                                    .foregroundStyle(.orange)
-//                                            }
-//                                        }
-//                                        Text(rate)
-//                                            .font(.system(size: 12, weight: .bold))
-//                                            .padding(.top, 1)
-//                                            .foregroundStyle(.orange)
-//                                    }
-//                                }
+                                
+                                presenter.rateView { rate in
+                                    HStack(spacing: 8) {
+                                        HStack(spacing: 2) {
+                                            ForEach(0..<5, id: \.self) { index in
+                                                let separator = Int(rate.components(separatedBy: ".").last ?? "0") ?? 0
+                                                let double = Double(rate) ?? 0
+                                                let separate = Int(double.rounded(.down)) == index && separator >= 1
+                                                Image(systemName: index < Int(double.rounded(.down)) ? "star.fill" : separate ? "star.leadinghalf.filled" : "star")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 12)
+                                                    .foregroundStyle(.orange)
+                                            }
+                                        }
+                                        Text(rate)
+                                            .font(.system(size: 12, weight: .bold))
+                                            .padding(.top, 1)
+                                            .foregroundStyle(.orange)
+                                    }
+                                }
                                 .padding(.bottom, 4)
                             }
                             
@@ -105,9 +112,11 @@ struct MovieDetailScreen: View {
                                     .font(.system(size: 14, weight: .bold))
                                     .foregroundStyle(.black)
                                 
-//                                presenter.overview { text in
-//                                    Text(text)
-//                                }
+                                HStack(spacing: 4) {
+                                    Text(presenter.movie.overview)
+                                        .font(.system(size: 14))
+                                        .foregroundStyle(.gray)
+                                }
                             }
                             .padding(.horizontal, LayoutConstants.sidePadding)
                             
@@ -139,13 +148,13 @@ struct MovieDetailScreen: View {
                             Spacer()
                             
                             Button {
-//                                presenter.onTapFavoriteBTN()
+                                presenter.onTapFavoriteBTN()
                             } label: {
                                 Image(systemName: "heart.fill")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 16)
-                                    .foregroundStyle(presenter.isFavorite ? .red : .black)
+                                    .foregroundStyle(presenter.movie.isFavorite ? .red : .black)
                                     .padding(10)
                                     .background(.white)
                                     .clipShape(Circle())
@@ -163,21 +172,20 @@ struct MovieDetailScreen: View {
             .overlay(
                 ActivityIndicator(isAnimating: $presenter.isLoading, style: .large)
             )
-//            .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
-//                Button("Oke", role: .cancel) {
-//                    if presenter.isFromFavorite {
-//                        presenter.onDelete?()
-//                        dismiss()
-//                    }
-//                }
-//            }
-//            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $presenter.isAlertConfirmation) {
-//                Button("Batal", role: .cancel) { }
-//                
-//                Button("Yakin", role: .destructive) {
-//                    presenter.deleteFavorite()
-//                }
-//            }
+            .alert(presenter.msgError, isPresented: $presenter.isShowAlert) {
+                Button("Oke", role: .cancel) {
+                    if presenter.movie.isFavorite == false {
+                        dismiss()
+                    }
+                }
+            }
+            .alert("Apakah anda yakin menghapusnya dari favorit?", isPresented: $presenter.isAlertConfirmation) {
+                Button("Batal", role: .cancel) { }
+                
+                Button("Yakin", role: .destructive) {
+                    presenter.executeFavorite(id: presenter.movie)
+                }
+            }
             .onAppear {
                 master.visibility = .hidden
                 adaptiveColumn = [

@@ -17,10 +17,7 @@ class URLSessionClient: HttpClient {
     
     public func load(request: URLRequest) -> RxSwift.Observable<Data> {
         return Observable<Data>.create { observer in
-//            var request = URLRequest(url: url)
-//            request.httpMethod = method
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+            
             self.session.dataTask(with: request) { data, response, error in
                 if let error {
                     observer.onError(error)
